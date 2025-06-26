@@ -13,20 +13,20 @@
             class="mx-1 text-sm text-slate-700 hover:text-slate-600 dark:text-white"
             >/</span
           >
-          <router-link
-            :to="{ name: route.name }"
+          <NuxtLink
+            to="/"
             class="text-sm font-normal capitalize text-slate-700 no-underline hover:underline dark:text-white dark:hover:text-white"
-            >{{ route.meta.name }}</router-link
+            >{{ route.meta.name }}</NuxtLink
           >
         </a>
       </div>
       <p
         class="shrink my-0 text-[33px] capitalize text-slate-700 dark:text-white"
       >
-        <router-link
-          :to="{ name: route.name }"
+        <NuxtLink
+          to="/"
           class="font-bold capitalize text-slate-700 no-underline hover:underline dark:text-white dark:hover:text-white"
-          >{{ route.meta.title }}</router-link
+          >{{ route.meta.title }}</NuxtLink
         >
       </p>
     </div>
@@ -49,7 +49,6 @@
 
       <span
         class="flex cursor-pointer text-xl text-gray-600 dark:text-white xl:hidden"
-        @click="app.onCloseSidebar"
       >
         <div class="i-carbon-menu w-5 h-5" />
       </span>
@@ -133,15 +132,15 @@
         />
       </div>
       <!-- Button dark mode toggle -->
-      <div class="cursor-pointer" @click="app.toggleDark">
-        <div
+      <div class="cursor-pointer" >
+        <!-- <div
           v-if="app.isDark"
           class="i-carbon-sun h-5 w-5 text-gray-600 dark:text-white"
         />
         <div
           v-else
           class="i-carbon-moon h-5 w-5 text-gray-600 dark:text-white"
-        />
+        /> -->
       </div>
       <!-- Profile and dropdown -->
       <Dropdown class="py-2 top-8 -left-[180px] w-max">
@@ -159,27 +158,26 @@
             <div class="mt-3 ml-4">
               <div class="flex items-center gap-2">
                 <p class="text-sm font-bold text-slate-700 dark:text-white">
-                  👋 Hey, {{ auth?.user?.name }}
+                  👋 Hey, 
                 </p>
               </div>
             </div>
             <div class="mt-3 h-px w-full bg-gray-200 dark:bg-white/20" />
 
             <div class="mt-3 ml-4 flex flex-col">
-              <router-link
+              <NuxtLink
                 to="/"
                 class="text-sm no-underline text-gray-800 dark:text-white hover:dark:text-white"
               >
                 Profile Settings
-              </router-link>
-              <router-link
+              </NuxtLink>
+              <NuxtLink
                 to="/"
                 class="mt-3 text-sm no-underline text-gray-800 dark:text-white hover:dark:text-white"
               >
                 Newsletter Settings
-              </router-link>
+              </NuxtLink>
               <p
-                @click="auth.logout"
                 class="mt-3 text-sm cursor-pointer font-medium text-red-500 hover:text-red-500"
               >
                 Log Out
@@ -193,11 +191,5 @@
 </template>
 <script lang="ts" setup>
 import Dropdown from '@/components/Dropdown/index.vue'
-const app = useAppStore()
-const auth = useAuthStore()
 const route = useRoute()
-
-watchEffect(() => {
-  auth.fetchProfile()
-})
 </script>

@@ -10,15 +10,15 @@
           <div
             class="mb-auto flex flex-col pl-5 pr-5 md:pr-0 md:pl-12 lg:max-w-[48%] lg:pl-0 xl:max-w-full"
           >
-            <router-link to="/" class="no-underline w-max lg:pt-10">
+            <NuxtLink to="/" class="no-underline w-max lg:pt-10">
               <div
                 class="mx-auto flex h-fit w-fit items-center hover:cursor-pointer"
               >
-                <div class="i-carbon-chevron-left"></div>
+                <UIcon name="i-carbon-chevron-left" />
                 <p class="ml-3 text-sm text-gray-600">Back to Dashboard</p>
               </div>
-            </router-link>
-            <router-view />
+            </NuxtLink>
+            <slot />
             <div
               class="absolute right-0 hidden h-full min-h-screen md:block lg:w-[49vw] 2xl:w-[44vw]"
             >

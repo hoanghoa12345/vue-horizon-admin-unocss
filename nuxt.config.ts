@@ -4,10 +4,18 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   srcDir: 'src/',
   css: ['~/assets/css/main.css'],
-  modules: ['@nuxt/ui'],
+  modules: ['@nuxt/ui', '@nuxtjs/i18n'],
   ui: {
   },
   fonts: {
-    provider: 'adobe'
+    provider: 'local'
+  },
+  i18n: {
+    defaultLocale: 'en',
+    locales: [
+      { code: 'en', name: 'English', file: 'en.json' },
+      { code: 'vi', name: 'Vietnamese', file: 'vi.json' }
+    ],
+    langDir: '../src/i18n/locales'
   }
 })

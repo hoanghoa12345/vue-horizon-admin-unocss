@@ -4,7 +4,7 @@
     <form class="mt-[10vh] w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]">
       <div class="flex flex-col items-center justify-between">
         <h4 class="mb-2.5 text-4xl font-bold text-black dark:text-white">
-          Welcome Back
+          {{ $t('welcome_back')  }}
         </h4>
         <p class="mb-9 ml-1 text-base text-zinc-400">
           Welcome back, please enter your details
@@ -32,6 +32,8 @@
     </form>
   </div>
 </template>
-<script lang="ts" setup>
-
+<script setup lang="ts">
+definePageMeta({
+  layout: 'auth'
+})
 </script>
