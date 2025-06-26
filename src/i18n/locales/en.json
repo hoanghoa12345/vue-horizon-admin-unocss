@@ -1,3 +1,11 @@
 {
-    "welcome_back": "Welcome Back"
+    "sign_in": "Sign In",
+    "username": "Username",
+    "password": "Password",
+    "please_enter_username": "Please enter username",
+    "please_enter_password": "Please enter your password",
+    "username_must_be_at_least_3_characters": "Username must be at least 3 characters",
+    "password_must_be_at_least_6_characters": "Password must be at least 6 characters",
+    "login_failed": "Login failed, please check your username and password",
+    "error": "Error"
 }
