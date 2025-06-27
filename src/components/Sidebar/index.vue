@@ -87,7 +87,7 @@ function navigate(routeName: string): void {
   try {
     router.push({ name: routeName })
   } catch (error) {
-    router.push({ name: 'not.found' })
+    router.push('/404')
   }
 }
 </script>
