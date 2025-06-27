@@ -4,7 +4,7 @@
         <div class="h-full w-full">
             <main class="mx-[12px] h-full flex-none transition-all md:pr-2 xl:ml-[313px]">
                 <div class="h-full">
-                    <Navbar />
+                    <Navbar @menu="open = !open"/>
                     <div class="pt-5 mx-auto mb-auto h-full min-h-[48vh] p-2 md:pr-2">
                         <slot />
                     </div>

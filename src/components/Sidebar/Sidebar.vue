@@ -12,7 +12,7 @@
 
     <div class="mx-[56px] mt-[50px] flex items-center">
       <div
-        class="mt-1 ml-1 h-2.5 font-poppins text-[26px] font-bold uppercase text-slate-700 dark:text-white"
+        class="mt-1 ml-1 h-2.5 text-[26px] font-bold uppercase text-slate-700 dark:text-white"
       >
         Horizon <span class="font-medium">Admin</span>
       </div>
