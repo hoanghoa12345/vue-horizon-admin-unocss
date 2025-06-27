@@ -1,3 +1,5 @@
+import { useAppStore } from '~/stores/app'
+
 export const usePermissions = () => {
   const appStore = useAppStore()
   const user = appStore.user

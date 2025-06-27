@@ -1,5 +1,7 @@
 import type { AppConfig } from '~/types/config'
 import type { User } from '~/types/user'
+import { defineStore } from 'pinia'
+import { ref } from 'vue'
 
 export const useAppStore = defineStore('appStore', () => {
   const initialized = ref(false)
