@@ -1,19 +1,16 @@
 <template>
   <UApp :locale="locales[locale]">
-    <NuxtLayout>
-      <NuxtRouteAnnouncer />
-      <NuxtPage />
-    </NuxtLayout>
+    <RouterView />
   </UApp>
 </template>
 <script setup lang="ts">
 import { apiConfig } from '~/services/apiConfig'
 import * as locales from '@nuxt/ui/locale'
-import {useI18n} from 'vue-i18n'
-import {useAppStore} from '~/stores/app'
-import {usePermissions} from '~/composables/usePermissions'
-import {useRouter} from 'vue-router'
-import {onMounted} from 'vue'
+import { useI18n } from 'vue-i18n'
+import { useAppStore } from '~/stores/app'
+import { usePermissions } from '~/composables/usePermissions'
+import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 
 const { locale } = useI18n()
 const appStore = useAppStore()

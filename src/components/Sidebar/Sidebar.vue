@@ -55,6 +55,8 @@
 </template>
 
 <script lang="ts" setup>
+import { useRoute, useRouter } from 'vue-router';
+
 type RouteItem = {
   icon: string
   name: string

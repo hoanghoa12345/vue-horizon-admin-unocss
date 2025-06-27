@@ -18,7 +18,9 @@
 </template>
 
 <script lang="ts" setup>
-const open = useState('open', () => false)
+import { ref } from 'vue';
+
+const open = ref<boolean>(false)
 </script>
 
 <style lang="css" scoped></style>

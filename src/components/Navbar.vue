@@ -57,7 +57,9 @@
   </nav>
 </template>
 <script lang="ts" setup>
-import Dropdown from '@/components/Dropdown/index.vue'
+import Dropdown from '~/components/Dropdown/index.vue'
+import { useRoute } from 'vue-router';
+import { useAppStore } from '~/stores/app';
 
 const emit = defineEmits(['menu'])
 

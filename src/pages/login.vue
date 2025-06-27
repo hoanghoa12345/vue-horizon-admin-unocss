@@ -56,10 +56,13 @@
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
 import { apiConfig } from '~/services/apiConfig'
-
-definePageMeta({
-  layout: 'auth',
-})
+import { useI18n } from 'vue-i18n';
+import { useAppStore } from '~/stores/app';
+import { ref } from 'vue';
+import { reactive } from 'vue';
+import { useRouter } from 'vue-router';
+import { usePermissions } from '~/composables/usePermissions';
+import { watch } from 'vue';
 
 const { t } = useI18n()
 const app = useAppStore()
@@ -89,9 +92,9 @@ const { is, can } = usePermissions()
 
 const handleSubmit = async (event: FormSubmitEvent<FormSchema>) => {
   loading.value = true
-  const res = await $fetch(apiConfig.LOGIN, {
+  const res = await fetch(apiConfig.LOGIN, {
     method: 'POST',
-    body: event.data,
+    body: JSON.stringify(event.data),
     headers: {
       'Content-Type': 'application/json',
       'X-CSRF-Token': app.csrfToken,
