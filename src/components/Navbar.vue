@@ -60,6 +60,8 @@
 import Dropdown from '~/components/Dropdown/index.vue'
 import { useRoute } from 'vue-router';
 import { useAppStore } from '~/stores/app';
+import { useColorMode } from '@nuxt/ui/runtime/vue/stubs.js';
+import { computed } from 'vue';
 
 const emit = defineEmits(['menu'])
 

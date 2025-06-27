@@ -6,7 +6,7 @@
                 <div class="h-full">
                     <Navbar @menu="open = !open"/>
                     <div class="pt-5 mx-auto mb-auto h-full min-h-[48vh] p-2 md:pr-2">
-                        <slot />
+                        <RouterView />
                     </div>
                     <div class="pt-3">
                         <!-- Footer -->
