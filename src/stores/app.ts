@@ -20,6 +20,7 @@ export const useAppStore = defineStore('appStore', () => {
   })
   const tree = ref({})
   const csrfToken = ref('')
+  const currentView = ref<'list' | 'grid'>('grid')
 
   const setConfig = (newConfig: AppConfig) => {
     config.value = { ...config.value, ...newConfig }
@@ -43,6 +44,7 @@ export const useAppStore = defineStore('appStore', () => {
     cwd,
     tree,
     csrfToken,
+    currentView,
     setConfig,
     setUser,
     setCsrfToken,
