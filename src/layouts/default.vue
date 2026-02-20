@@ -1,5 +1,5 @@
 <template>
-  <div class="flex h-full w-full">
+  <div class="flex h-screen w-full">
     <Sidebar
       :open="appStore.sidebar.open"
       :open-content-sidebar="appStore.sidebar.openContentSidebar"
@@ -12,7 +12,7 @@
         :class="computedMarginSidebar"
       >
         <div class="h-full">
-          <Navbar @menu="appStore.toggleSidebar" />
+          <Navbar @menu="toggleSidebar" />
           <div class="pt-5 mx-auto mb-auto h-full min-h-[48vh] p-2 md:pr-2">
             <RouterView />
           </div>
@@ -28,10 +28,9 @@ import { useMobile } from '~/composables/useMobile'
 import { useAppStore } from '~/stores/app'
 
 const appStore = useAppStore()
-const mobile = useMobile(768)
+const mobile = useMobile(480)
 
 const computedMarginSidebar = computed(() => {
-  console.log('isMobile: ', mobile.isMobile.value)
   if (mobile.isMobile.value) return 'ml-0'
   if (appStore.sidebar.open) return 'ml-[68px]'
   return appStore.sidebar.openContentSidebar ? 'xl:ml-[313px]' : 'ml-[68px]'
@@ -44,6 +43,20 @@ watch(
     appStore.sidebar.openContentSidebar = true
   }
 )
+
+const toggleSidebar = () => {
+  appStore.toggleSidebar()
+  if (mobile.isMobile.value) {
+    if (appStore.sidebar.open) {
+      appStore.sidebar.openContentSidebar = true
+    } else {
+      appStore.sidebar.openContentSidebar = false
+    }
+  }
+  if (mobile.isDesktop.value) {
+    appStore.toggleContentSidebar()
+  }
+}
 </script>
 
 <style lang="css" scoped></style>

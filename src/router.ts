@@ -23,6 +23,10 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/:catchAll(.*)*',
+      component: () => import('~/pages/404.vue'),
+    },
   ],
   history: createWebHistory(),
 })
