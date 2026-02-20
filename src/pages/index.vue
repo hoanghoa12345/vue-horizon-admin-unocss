@@ -1,26 +1,39 @@
+<script lang="ts" setup>
+import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
+import FolderGridLayout from '~/components/FolderLayouts/FolderGridLayout.vue'
+import FolderListLayout from '~/components/FolderLayouts/FolderListLayout.vue'
+import { useAppStore } from '~/stores/app'
+
+const { t } = useI18n()
+const app = useAppStore()
+
+const items = ref([
+  { value: 'list', icon: 'i-lucide-layout-list' },
+  {
+    value: 'grid',
+    icon: 'i-lucide-layout-grid',
+  },
+])
+
+const active = computed({
+  get() {
+    return app.currentView
+  },
+  set(tab) {
+    app.currentView = tab
+  },
+})
+</script>
 <template>
   <div>
-    <div
-      class="mt-3 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-6"
-    >
-      <Widget icon="i-carbon-chart-column" title="Earning" subtitle="$340.5" />
-      <Widget
-        icon="i-carbon-document"
-        title="Spend this month"
-        subtitle="$642.9"
-      />
-      <Widget icon="i-carbon-chart-column" title="Sales" subtitle="$574.5" />
-      <Widget
-        icon="i-carbon-list-boxes"
-        title="Your balance"
-        subtitle="$1,000"
-      />
-      <Widget icon="i-carbon-chart-column" title="New Tasks" subtitle="145" />
-      <Widget icon="i-carbon-home" title="Total Projects" subtitle="$2433" />
+    <div class="py-4 flex justify-between items-center">
+      <h4>{{ t('my_drive') }}</h4>
+      <UTabs v-model="active" :items="items" color="secondary" />
+    </div>
+    <div>
+      <FolderGridLayout v-if="active === 'grid'" />
+      <FolderListLayout v-else-if="active === 'list'" />
     </div>
   </div>
 </template>
-
-<script lang="ts" setup>
-import Widget from '@/components/Widget/Widget.vue'
-</script>

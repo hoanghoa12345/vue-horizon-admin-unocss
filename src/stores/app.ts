@@ -1,37 +1,67 @@
-import { acceptHMRUpdate, defineStore } from 'pinia'
+import type { AppConfig } from '~/types/config'
+import type { User } from '~/types/user'
+import { defineStore } from 'pinia'
 import { ref } from 'vue'
-const state = 'app'
 
-export const useAppStore = defineStore(state, () => {
-  /**
-   * Current state of app
-   */
+export const useAppStore = defineStore('appStore', () => {
+  const initialized = ref(false)
+  const config = ref<AppConfig>({
+    pagination: ['', '5', '10', '15'],
+  })
+  const user = ref<User>({
+    role: 'guest',
+    permissions: [],
+    name: '',
+    username: '',
+  })
+  const cwd = ref({
+    location: '/',
+    content: [],
+  })
+  const sidebar = ref({
+    open: false,
+    openContentSidebar: false,
+  })
+  const tree = ref({})
+  const csrfToken = ref('')
+  const currentView = ref<'list' | 'grid'>('grid')
 
-  const isOpenSidebar = ref<boolean>(false)
-
-  const isDark = ref<boolean>(false)
-
-  function onCloseSidebar() {
-    isOpenSidebar.value = !isOpenSidebar.value
+  const setConfig = (newConfig: AppConfig) => {
+    config.value = { ...config.value, ...newConfig }
   }
-
-  function toggleDark() {
-    if (isDark.value) {
-      document.body.classList.remove('dark')
-      isDark.value = false
-    } else {
-      document.body.classList.add('dark')
-      isDark.value = true
-    }
+  const setUser = (newUser: any) => {
+    user.value = { ...user.value, ...newUser }
   }
-
+  const setCsrfToken = (token: string) => {
+    csrfToken.value = token
+  }
+  const setInitialized = (status: boolean) => {
+    initialized.value = status
+  }
+  const hasPermission = (permission: string): boolean => {
+    return user.value.permissions.includes(permission)
+  }
+  const toggleSidebar = () => {
+    sidebar.value.open = !sidebar.value.open
+  }
+  const toggleContentSidebar = () => {
+    sidebar.value.openContentSidebar = !sidebar.value.openContentSidebar
+  }
   return {
-    isOpenSidebar,
-    onCloseSidebar,
-    isDark,
-    toggleDark,
+    initialized,
+    config,
+    user,
+    cwd,
+    tree,
+    csrfToken,
+    currentView,
+    sidebar,
+    toggleSidebar,
+    toggleContentSidebar,
+    setConfig,
+    setUser,
+    setCsrfToken,
+    setInitialized,
+    hasPermission,
   }
 })
-
-if (import.meta.hot)
-  import.meta.hot.accept(acceptHMRUpdate(useAppStore as any, import.meta.hot))

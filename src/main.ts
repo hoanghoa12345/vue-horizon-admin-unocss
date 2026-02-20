@@ -1,14 +1,31 @@
-import { createApp } from 'vue'
+import './assets/main.css'
 
+import { createApp } from 'vue'
+import ui from '@nuxt/ui/vue-plugin'
+import { createI18n } from 'vue-i18n'
+import { createPinia } from 'pinia'
 import App from './App.vue'
-import routes from './routes'
-import store from './stores'
-import 'virtual:uno.css'
-import './styles/main.css'
-import '@unocss/reset/normalize.css'
+import en from '~/i18n/locales/en.json'
+import vi from '~/i18n/locales/vi.json'
+import router from './router'
 
 const app = createApp(App)
 
-app.use(routes)
-app.use(store)
+const i18n = createI18n({
+  legacy: false,
+  locale: 'en',
+  availableLocales: ['en', 'vi'],
+  messages: {
+    en,
+    vi,
+  },
+})
+
+const pinia = createPinia()
+
+app.use(router)
+app.use(pinia)
+app.use(i18n)
+app.use(ui)
+
 app.mount('#app')
