@@ -1,23 +1,38 @@
 <template>
   <nav
-    class="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between rouned-xl bg-white/10 p-2 backdrop-blur-xl dark:bg-[#0b14374d]">
-    <div class="ml-[6px]">
+    class="sticky top-4 z-40 flex flex-row flex-wrap items-center justify-between dark:bg-[#0b14374d]"
+  >
+    <!-- <div class="ml-[6px]">
       <UTooltip :text="$t('my_drive')">
-      <NuxtLink to="/">
+      <RouterLink to="/">
         <Logo size="40" :color="isDark ? 'white' : 'black'" />
-      </NuxtLink>
+      </RouterLink>
       </UTooltip>
-    </div>
+    </div> -->
 
     <div
-      class="relative mt-[3px] flex h-[48px] w-[355px] flex-grow items-center justify-around gap-2 rounded-full bg-white px-2 py-2 shadow-xl shadow-gray-500 dark:bg-slate-800 dark:shadow-none md:w-[365px] md:flex-grow-0 md:gap-1 xl:w-[365px] xl:gap-2">
-      <div
-        class="flex h-full items-center rounded-full bg-slate-100 text-slate-700 dark:bg-slate-900 dark:text-white xl:w-[225px]">
-        <UInput size="xl" type="text" icon="i-carbon-search" :placeholder="$t('search_anything')" variant="ghost"
-          color="neutral" :ui="{ root: 'rounded-full', base: 'rounded-full' }" />
-      </div>
-
-      <UButton icon="i-lucide-menu" size="md" color="neutral" variant="ghost" @click="emit('menu')" />
+      class="relative flex h-[48px] flex-grow items-center justify-around gap-2 py-2"
+    >
+      <UButton
+        v-if="mobile.isMobile.value"
+        icon="i-lucide-menu"
+        size="md"
+        color="neutral"
+        variant="ghost"
+        @click="emit('menu')"
+        class="ml-[68px]"
+      />
+      <UButton icon="i-lucide-plus" size="xl" color="neutral" variant="solid">
+        {{ $t('new') }}
+      </UButton>
+      <UInput
+        size="xl"
+        type="text"
+        icon="i-carbon-search"
+        :placeholder="$t('search')"
+        variant="outline"
+      >
+      </UInput>
       <!-- Button dark mode toggle -->
       <div>
         <ColorModeButton />
@@ -25,11 +40,16 @@
       <!-- Profile and dropdown -->
       <Dropdown class="py-2 top-8 -left-[180px] w-max">
         <template #button>
-          <img class="h-10 w-10 rounded-full" src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/3d_4.png" alt="User" />
+          <img
+            class="h-10 w-10 rounded-xl"
+            src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/3d_4.png"
+            alt="User"
+          />
         </template>
         <template #content>
           <div
-            class="flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-gray-500 dark:bg-gray-700 dark:text-white dark:shadow-none">
+            class="flex h-48 w-56 flex-col justify-start rounded-[20px] bg-white bg-cover bg-no-repeat shadow-xl shadow-gray-500 dark:bg-gray-700 dark:text-white dark:shadow-none"
+          >
             <div class="mt-3 ml-4">
               <div class="flex items-center gap-2">
                 <p class="text-sm font-bold text-slate-700 dark:text-white">
@@ -40,13 +60,21 @@
             <div class="mt-3 h-px w-full bg-gray-200 dark:bg-white/20" />
 
             <div class="mt-3 ml-4 flex flex-col">
-              <NuxtLink to="/" class="text-sm no-underline text-gray-800 dark:text-white hover:dark:text-white">
+              <RouterLink
+                to="/"
+                class="text-sm no-underline text-gray-800 dark:text-white hover:dark:text-white"
+              >
                 Profile Settings
-              </NuxtLink>
-              <NuxtLink to="/" class="mt-3 text-sm no-underline text-gray-800 dark:text-white hover:dark:text-white">
+              </RouterLink>
+              <RouterLink
+                to="/"
+                class="mt-3 text-sm no-underline text-gray-800 dark:text-white hover:dark:text-white"
+              >
                 Newsletter Settings
-              </NuxtLink>
-              <p class="mt-3 text-sm cursor-pointer font-medium text-red-500 hover:text-red-500">
+              </RouterLink>
+              <p
+                class="mt-3 text-sm cursor-pointer font-medium text-red-500 hover:text-red-500"
+              >
                 Log Out
               </p>
             </div>
@@ -58,10 +86,11 @@
 </template>
 <script lang="ts" setup>
 import Dropdown from '~/components/Dropdown/index.vue'
-import { useRoute } from 'vue-router';
-import { useAppStore } from '~/stores/app';
-import { useColorMode } from '@nuxt/ui/runtime/vue/stubs.js';
-import { computed } from 'vue';
+import { useRoute } from 'vue-router'
+import { useAppStore } from '~/stores/app'
+import { useColorMode } from '@nuxt/ui/runtime/vue/stubs.js'
+import { computed } from 'vue'
+import { useMobile } from '~/composables/useMobile'
 
 const emit = defineEmits(['menu'])
 
@@ -69,6 +98,7 @@ const route = useRoute()
 const app = useAppStore()
 
 const colorMode = useColorMode()
+const mobile = useMobile(768)
 
 const isDark = computed({
   get() {
@@ -76,6 +106,6 @@ const isDark = computed({
   },
   set(_isDark) {
     colorMode.preference = _isDark ? 'dark' : 'light'
-  }
+  },
 })
 </script>

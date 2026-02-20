@@ -5,7 +5,7 @@ import { ref } from 'vue'
 
 export const useAppStore = defineStore('appStore', () => {
   const initialized = ref(false)
-  const config = ref({
+  const config = ref<AppConfig>({
     pagination: ['', '5', '10', '15'],
   })
   const user = ref<User>({
@@ -17,6 +17,10 @@ export const useAppStore = defineStore('appStore', () => {
   const cwd = ref({
     location: '/',
     content: [],
+  })
+  const sidebar = ref({
+    open: false,
+    openContentSidebar: false,
   })
   const tree = ref({})
   const csrfToken = ref('')
@@ -37,6 +41,12 @@ export const useAppStore = defineStore('appStore', () => {
   const hasPermission = (permission: string): boolean => {
     return user.value.permissions.includes(permission)
   }
+  const toggleSidebar = () => {
+    sidebar.value.open = !sidebar.value.open
+  }
+  const toggleContentSidebar = () => {
+    sidebar.value.openContentSidebar = !sidebar.value.openContentSidebar
+  }
   return {
     initialized,
     config,
@@ -45,6 +55,9 @@ export const useAppStore = defineStore('appStore', () => {
     tree,
     csrfToken,
     currentView,
+    sidebar,
+    toggleSidebar,
+    toggleContentSidebar,
     setConfig,
     setUser,
     setCsrfToken,

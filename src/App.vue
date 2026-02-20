@@ -1,10 +1,10 @@
 <template>
-  <UApp :locale="locales[locale]">
+  <UApp :locale="(locales as any)[locale]">
     <RouterView />
   </UApp>
 </template>
 <script setup lang="ts">
-import { apiConfig } from '~/services/apiConfig'
+import { getConfig as getConfigApi, getUser as getUserApi } from '~/services/requests'
 import * as locales from '@nuxt/ui/locale'
 import { useI18n } from 'vue-i18n'
 import { useAppStore } from '~/stores/app'
@@ -18,23 +18,20 @@ const { is, can } = usePermissions()
 const router = useRouter()
 
 const getConfig = async () => {
-  // const config = await $fetch(apiConfig.GET_CONFIG)
-  // appStore.setConfig(config.data)
+  const data = await getConfigApi()
+  appStore.setConfig(data)
 }
 
 const getUser = async () => {
-  /*const user = await $fetch.raw(apiConfig.GET_USER)
-  const csrfToken = user.headers.get('x-csrf-token')
-  appStore.setUser(user._data.data)
-  appStore.setCsrfToken(csrfToken || '')
+  const user = await getUserApi()
+  appStore.setUser(user)
   appStore.setInitialized(true)
   if (is('guest') && !can('write') && !can('read') && !can('upload')) {
     router.push('/login')
-  }*/
+  }
 }
 
 onMounted(() => {
-  getConfig()
-  getUser()
+  // Promise.all([getConfig(), getUser()])
 })
 </script>

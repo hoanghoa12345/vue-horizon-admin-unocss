@@ -1,68 +1,107 @@
 <template>
-  <div
-    class="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start"
-  >
-    <UForm
-      :schema="schema"
-      :state="state"
-      @submit="handleSubmit"
-      class="mt-[10vh] w-full max-w-full flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]"
+  <div>
+    <header
+      class="sticky top-0 z-40 flex flex-row flex-wrap items-center justify-between"
     >
-      <UCard class="mb-4 w-full">
-        <div class="flex flex-col items-center justify-between">
-          <img
-            :src="app.config.logo"
-            :alt="app.config.app_name"
-            class="mb-4 h-12 w-60"
-          />
+      <nav
+        class="flex justify-between items-center border-b border-gray-200 px-4 py-2 dark:border-gray-700 dark:bg-gray-800 w-full"
+      >
+        <div class="flex gap-2 items-center">
+          <Logo size="40" />
+          <h2 class="text-2xl font-bold font-sans">{{ t('cloud_drive') }}</h2>
         </div>
         <div>
-          <UFormField class="my-4" :label="$t('username')" name="username">
-            <UInput
-              size="xl"
-              leading
-              leading-icon="i-lucide-user-round"
-              class="w-full"
-              :placeholder="$t('please_enter_username')"
-              v-model="state.username"
-            />
-          </UFormField>
-          <UFormField class="my-4" :label="$t('password')" name="password">
-            <UInput
-              size="xl"
-              type="password"
-              leading
-              leading-icon="i-lucide-lock"
-              class="w-full"
-              :placeholder="$t('please_enter_password')"
-              trailing-icon="i-lucide-eye-off"
-              v-model="state.password"
-            />
-          </UFormField>
           <UButton
-            type="submit"
-            class="font-bold"
-            block
-            size="xl"
-            :loading="loading"
-            >{{ $t('sign_in') }}</UButton
-          >
+            icon="i-lucide-globe"
+            size="md"
+            color="neutral"
+            variant="ghost"
+          />
         </div>
-      </UCard>
-    </UForm>
+      </nav>
+    </header>
+    <div
+      class="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-0 lg:mb-10 lg:items-center lg:justify-start"
+    >
+      <UForm
+        :schema="schema"
+        :state="state"
+        @submit="handleSubmit"
+        class="mt-[10vh] w-full max-w-[420px] flex-col items-center md:pl-4 lg:pl-0 xl:max-w-[420px]"
+      >
+        <div class="mb-4 w-full">
+          <div>
+            <div v-if="state.login_step === 1">
+              <UFormField class="my-4" :label="$t('email')" name="username">
+                <UInput
+                  size="xl"
+                  class="w-full"
+                  :placeholder="$t('please_enter_username')"
+                  v-model="state.username"
+                />
+              </UFormField>
+            </div>
+            <div v-if="state.login_step === 2">
+              <UButton
+                icon="i-lucide-arrow-left"
+                size="md"
+                color="neutral"
+                variant="ghost"
+                @click="state.login_step = 1"
+              >
+                Back
+              </UButton>
+              <div class="my-4 mt-2 text-center">
+                <h2 class="text-2xl font-semibold py-2">{{ $t('welcome_back') }}</h2>
+                <div>
+                  <p>{{ $t('login_using') }}</p>
+                  <p>{{ state.username }}</p>
+                </div>
+              </div>
+
+              <UFormField class="my-4" :label="$t('password')" name="password">
+                <UInput
+                  size="xl"
+                  type="password"
+                  class="w-full"
+                  :placeholder="$t('please_enter_password')"
+                  trailing-icon="i-lucide-eye"
+                  @trailing-icon-click="togglePasswordVisibility"
+                  v-model="state.password"
+                />
+              </UFormField>
+              <div class="my-4">
+                <UCheckbox v-model="state.remember_me" :label="$t('remember_me')" />
+              </div>
+            </div>
+
+            <UButton
+              type="submit"
+              class="font-bold bg-blue-500 text-white hover:bg-blue-400 h-12"
+              block
+              size="xl"
+              :loading="loading"
+              >{{
+                state.login_step === 1 ? $t('continue') : $t('sign_in')
+              }}</UButton
+            >
+          </div>
+        </div>
+      </UForm>
+    </div>
   </div>
 </template>
 <script setup lang="ts">
 import * as v from 'valibot'
 import type { FormSubmitEvent } from '@nuxt/ui'
-import { apiConfig } from '~/services/apiConfig'
-import { useI18n } from 'vue-i18n';
-import { useAppStore } from '~/stores/app';
-import { ref } from 'vue';
-import { reactive } from 'vue';
-import { useRouter } from 'vue-router';
-import { usePermissions } from '~/composables/usePermissions';
-import { watch } from 'vue';
+import { useI18n } from 'vue-i18n'
+import { useAppStore } from '~/stores/app'
+import { ref } from 'vue'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
+import { usePermissions } from '~/composables/usePermissions'
+import { watch } from 'vue'
+import { login } from '~/services/requests'
 
 const { t } = useI18n()
 const app = useAppStore()
@@ -74,8 +113,8 @@ const schema = v.object({
     v.minLength(4, t('username_must_be_at_least_3_characters'))
   ),
   password: v.pipe(
-    v.string(),
-    v.minLength(4, t('password_must_be_at_least_6_characters'))
+    v.string()
+    // v.minLength(4, t('password_must_be_at_least_6_characters'))
   ),
 })
 
@@ -84,6 +123,8 @@ type FormSchema = v.InferOutput<typeof schema>
 const state = reactive({
   username: '',
   password: '',
+  remember_me: false,
+  login_step: 1,
 })
 
 const toast = useToast()
@@ -91,35 +132,28 @@ const router = useRouter()
 const { is, can } = usePermissions()
 
 const handleSubmit = async (event: FormSubmitEvent<FormSchema>) => {
-  loading.value = true
-  const res = await fetch(apiConfig.LOGIN, {
-    method: 'POST',
-    body: JSON.stringify(event.data),
-    headers: {
-      'Content-Type': 'application/json',
-      'X-CSRF-Token': app.csrfToken,
-    },
-  }).catch((error) => {
-    if (error.statusCode === 422) {
-      const errors = error.data
-      toast.add({
-        title: t('error'),
-        description: errors,
-        color: 'danger',
-      })
-    } else {
-      toast.add({
-        title: t('error'),
-        description: t('login_failed'),
-        color: 'danger',
-      })
-    }
-  })
-  if (res) {
-    app.setUser(res.data)
-    router.push('/')
+  if (state.login_step === 1) {
+    state.login_step = 2
+    return
   }
-  loading.value = false
+  try {
+    loading.value = true
+    const data = await login(event.data)
+    app.setUser(data)
+    router.push('/')
+  } catch (error) {
+    toast.add({
+      title: t('error'),
+      description: t('login_failed'),
+      color: 'error',
+    })
+  } finally {
+    loading.value = false
+  }
+}
+
+const togglePasswordVisibility = () => {
+  console.log('toggled')
 }
 
 watch(

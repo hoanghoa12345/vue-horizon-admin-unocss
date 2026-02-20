@@ -26,12 +26,14 @@ const active = computed({
 })
 </script>
 <template>
-  <div class="py-4 flex justify-between items-center">
-    <h4>{{ t('my_drive') }}</h4>
-    <UTabs v-model="active" :items="items" color="secondary" />
-  </div>
   <div>
-    <FolderGridLayout v-if="active === 'grid'" />
-    <FolderListLayout v-else-if="active === 'list'" />
+    <div class="py-4 flex justify-between items-center">
+      <h4>{{ t('my_drive') }}</h4>
+      <UTabs v-model="active" :items="items" color="secondary" />
+    </div>
+    <div>
+      <FolderGridLayout v-if="active === 'grid'" />
+      <FolderListLayout v-else-if="active === 'list'" />
+    </div>
   </div>
 </template>
