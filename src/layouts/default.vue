@@ -23,17 +23,22 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, watch } from 'vue'
+import { computed, watch, watchEffect } from 'vue'
 import { useMobile } from '~/composables/useMobile'
 import { useAppStore } from '~/stores/app'
 
 const appStore = useAppStore()
-const mobile = useMobile(480)
+const mobile = useMobile(768)
 
 const computedMarginSidebar = computed(() => {
   if (mobile.isMobile.value) return 'ml-0'
-  if (appStore.sidebar.open) return 'ml-[68px]'
-  return appStore.sidebar.openContentSidebar ? 'xl:ml-[313px]' : 'ml-[68px]'
+
+  if (appStore.sidebar.open) {
+    return appStore.sidebar.openContentSidebar
+      ? 'ml-[313px]'
+      : 'ml-[68px]'
+  }
+  return 'ml-[68px]'
 })
 
 watch(
@@ -45,8 +50,8 @@ watch(
 )
 
 const toggleSidebar = () => {
-  appStore.toggleSidebar()
   if (mobile.isMobile.value) {
+    appStore.toggleSidebar()
     if (appStore.sidebar.open) {
       appStore.sidebar.openContentSidebar = true
     } else {
@@ -57,6 +62,13 @@ const toggleSidebar = () => {
     appStore.toggleContentSidebar()
   }
 }
+
+watchEffect(() => {
+  if (mobile.isDesktop.value) {
+    appStore.sidebar.open = true
+    appStore.sidebar.openContentSidebar = true
+  }
+})
 </script>
 
 <style lang="css" scoped></style>
