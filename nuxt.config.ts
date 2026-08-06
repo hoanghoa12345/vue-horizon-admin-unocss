@@ -1,6 +1,9 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  unhead: {
+    legacy: false,
+  },
   srcDir: 'src/',
   modules: ['@nuxt/ui', '@nuxtjs/i18n', '@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
