@@ -16,5 +16,12 @@
   "login_using": "Log in using",
   "continue": "Continue",
   "remember_me": "Remember me",
-  "new": "New"
+  "new": "New",
+  "home": "Home",
+  "all_files": "All files",
+  "photos": "Photos",
+  "shared": "Shared",
+  "file_request": "File request",
+  "deleted_files": "Deleted files",
+  "quick_access": "Quick access"
 }
