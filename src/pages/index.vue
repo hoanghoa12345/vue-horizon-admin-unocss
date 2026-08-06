@@ -26,7 +26,7 @@ const active = computed({
 })
 </script>
 <template>
-  <div>
+  <NuxtLayout>
     <div class="py-4 flex justify-between items-center">
       <h4>{{ t('my_drive') }}</h4>
       <UTabs v-model="active" :items="items" color="secondary" />
@@ -35,5 +35,5 @@ const active = computed({
       <FolderGridLayout v-if="active === 'grid'" />
       <FolderListLayout v-else-if="active === 'list'" />
     </div>
-  </div>
+  </NuxtLayout>
 </template>

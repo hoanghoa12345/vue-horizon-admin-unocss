@@ -5,7 +5,7 @@
         <div
           class="mx-auto flex min-h-full w-full flex-col justify-start"
         >
-          <RouterView />
+          <NuxtPage />
         </div>
       </div>
     </main>

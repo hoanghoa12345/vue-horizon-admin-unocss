@@ -8,13 +8,13 @@
     />
     <div class="h-full w-full">
       <main
-        class="mx-[12px] h-full flex-none transition-all md:px-2"
+        class="mx-3 h-full flex-none transition-all md:px-2"
         :class="computedMarginSidebar"
       >
         <div class="h-full">
           <Navbar @menu="toggleSidebar" />
           <div class="pt-5 mx-auto mb-auto h-full min-h-[48vh] p-2 md:pr-2">
-            <RouterView />
+            <NuxtPage />
           </div>
         </div>
       </main>

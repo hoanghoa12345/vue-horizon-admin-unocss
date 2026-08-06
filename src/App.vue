@@ -1,6 +1,6 @@
 <template>
   <UApp :locale="(locales as any)[locale]">
-    <RouterView />
+    <NuxtPage />
   </UApp>
 </template>
 <script setup lang="ts">
