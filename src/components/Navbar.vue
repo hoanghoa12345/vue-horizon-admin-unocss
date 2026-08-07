@@ -3,7 +3,7 @@
     <div
       class="relative h-[48px] flex flex-row flex-wrap items-center justify-between gap-2 py-2"
     >
-      <UButton
+      <button
         icon="i-lucide-menu"
         size="md"
         color="neutral"
@@ -11,18 +11,17 @@
         @click="emit('menu')"
         class="ml-px"
       />
-      <UButton icon="i-lucide-plus" size="md" color="neutral" variant="solid">
-        {{ $t('new') }}
-      </UButton>
-      <UInput
+      <button icon="i-lucide-plus" size="md" color="neutral" variant="solid">
+        {{ t('new') }}
+      </button>
+      <input
         size="xl"
         type="text"
         icon="i-carbon-search"
-        :placeholder="$t('search')"
+        :placeholder="t('search')"
         variant="outline"
         class="flex-grow"
-      >
-      </UInput>
+      />
       <!-- Button dark mode toggle -->
       <div>
         <ColorModeButton />
@@ -94,6 +93,8 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { useRoute } from 'vue-router'
 import { useAppStore } from '~/stores/app'
 import { useMobile } from '~/composables/useMobile'
+
+const { t } = useI18n()
 
 const emit = defineEmits(['menu'])
 
