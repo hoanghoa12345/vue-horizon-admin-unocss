@@ -12,13 +12,13 @@
         class="ml-px"
       />
       <UButton icon="i-lucide-plus" size="md" color="neutral" variant="solid">
-        {{ $t('new') }}
+        {{ t('new') }}
       </UButton>
       <UInput
         size="xl"
         type="text"
         icon="i-carbon-search"
-        :placeholder="$t('search')"
+        :placeholder="t('search')"
         variant="outline"
         class="flex-grow"
       >
@@ -94,6 +94,10 @@ import { Menu, MenuButton, MenuItems, MenuItem } from '@headlessui/vue'
 import { useRoute } from 'vue-router'
 import { useAppStore } from '~/stores/app'
 import { useMobile } from '~/composables/useMobile'
+
+const t = (i: string) => {
+  return i;
+}
 
 const emit = defineEmits(['menu'])
 

@@ -1,5 +1,5 @@
 {
-  "name": "my-project",
+  "name": "cloud-drive",
   "version": "0.0.1",
   "private": true,
   "type": "module",
@@ -16,20 +16,15 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
-    "@nuxt/ui": "^3.2.0",
-    "@nuxtjs/i18n": "^9.5.6",
+    "@nuxtjs/tailwindcss": "^6.14.0",
     "@pinia/nuxt": "^1.0.1",
     "axios": "^1.10.0",
     "nuxt": "^4.5.2",
     "pinia": "^4.0.2",
     "valibot": "^1.1.0",
     "vue": "^3.5.17",
-    "vue-i18n": "10",
     "vue-router": "^4.5.1"
   },
   "devDependencies": {},
-  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee",
-  "overrides": {
-    "@intlify/unplugin-vue-i18n": "11.2.4"
-  }
+  "packageManager": "pnpm@11.20.0+sha512.9a6f330a95b66446ea088faf1521405a8a01f07fde7124cc9958dfed52d4bb436737e65b08f85f37b46fcba375092558ac51262b816844b22f63406ed166bfee"
 }

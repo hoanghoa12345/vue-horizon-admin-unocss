@@ -1,11 +1,12 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { useI18n } from 'vue-i18n'
 import FolderGridLayout from '~/components/FolderLayouts/FolderGridLayout.vue'
 import FolderListLayout from '~/components/FolderLayouts/FolderListLayout.vue'
 import { useAppStore } from '~/stores/app'
 
-const { t } = useI18n()
+const t = (i: string) => {
+  return i
+}
 const app = useAppStore()
 
 const items = ref([

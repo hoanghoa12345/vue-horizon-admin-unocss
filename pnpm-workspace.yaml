@@ -7,4 +7,4 @@ minimumReleaseAgeExclude:
   - '@nuxt/schema@4.5.2'
   - '@nuxt/vite-builder@4.5.2'
   - nuxt@4.5.2
-overrides: { '@intlify/unplugin-vue-i18n': '11.2.4' }
+overrides: {}

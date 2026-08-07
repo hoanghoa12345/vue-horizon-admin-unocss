@@ -6,10 +6,10 @@
     <div
       class="flex flex-col border-r h-screen overflow-y-auto border-gray-200 dark:border-gray-700 w-[68px] bg-white dark:bg-slate-800 z-50">
       <div class="flex items-center justify-center pt-4">
-        <UTooltip :text="$t('my_drive')">
-          <RouterLink to="/">
-            <Logo size="30" :color="isDark ? 'white' : 'black'" />
-          </RouterLink>
+        <UTooltip :text="t('my_drive')">
+          <NuxtLink to="/">
+            <Logo size="30" color="white" />
+          </NuxtLink>
         </UTooltip>
       </div>
 
@@ -19,14 +19,14 @@
             <div v-if="route.isPopover"
               class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
               <UPopover :content="{
-                align: 'center',
-                side: 'right',
-                sideOffset: 8,
-              }" modal>
+    align: 'center',
+    side: 'right',
+    sideOffset: 8,
+  }" modal>
                 <div :class="checkIsActiveRoute(route.routeName)
-                    ? ' bg-gray-200 dark:bg-slate-600 '
-                    : 'bg-transparent'
-                  " class="rounded-lg p-3 hover:bg-gray-200">
+    ? ' bg-gray-200 dark:bg-slate-600 '
+    : 'bg-transparent'
+    " class="rounded-lg p-3 hover:bg-gray-200">
                   <UIcon class="size-5" :name="route.icon" />
                 </div>
                 <p class="leading-1 flex text-xs">
@@ -44,9 +44,9 @@
             <div v-else
               class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
               <div :class="checkIsActiveRoute(route.routeName)
-                  ? ' bg-gray-200 dark:bg-slate-600 '
-                  : 'bg-transparent'
-                " class="rounded-lg p-3 hover:bg-gray-200">
+    ? ' bg-gray-200 dark:bg-slate-600 '
+    : 'bg-transparent'
+    " class="rounded-lg p-3 hover:bg-gray-200">
                 <UIcon class="size-5" :name="route.icon" />
               </div>
               <p class="leading-1 flex text-xs">
@@ -81,7 +81,6 @@
 
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import { useColorMode } from '@nuxt/ui/runtime/vue/stubs.js'
 import { TransitionRoot } from '@headlessui/vue'
 import HomeSidebar from './HomeSidebar.vue'
 
@@ -97,6 +96,9 @@ const props = defineProps({
   openContentSidebar: Boolean,
 })
 const emit = defineEmits(['onClose', 'onToggleContentSidebar'])
+const t = (i: string) => {
+  return i;
+}
 const routes: RouteItem[] = [
   {
     icon: 'i-lucide-home',
@@ -124,15 +126,6 @@ const routes: RouteItem[] = [
   },
 ]
 const currentRoute = ref<RouteItem>(routes[0])
-const colorMode = useColorMode()
-const isDark = computed({
-  get() {
-    return colorMode.value === 'dark'
-  },
-  set(_isDark) {
-    colorMode.preference = _isDark ? 'dark' : 'light'
-  },
-})
 
 function checkIsActiveRoute(routeName: string): boolean {
   return currentRoute.value.routeName === routeName

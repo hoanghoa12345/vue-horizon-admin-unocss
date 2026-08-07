@@ -93,8 +93,6 @@
 </template>
 <script setup lang="ts">
 import * as v from 'valibot'
-import type { FormSubmitEvent } from '@nuxt/ui'
-import { useI18n } from 'vue-i18n'
 import { useAppStore } from '~/stores/app'
 import { ref } from 'vue'
 import { reactive } from 'vue'
@@ -103,7 +101,9 @@ import { usePermissions } from '~/composables/usePermissions'
 import { watch } from 'vue'
 import { login } from '~/services/requests'
 
-const { t } = useI18n()
+const t = (i: string) => {
+  return i
+}
 const app = useAppStore()
 const loading = ref<boolean>(false)
 
@@ -127,11 +127,11 @@ const state = reactive({
   login_step: 1,
 })
 
-const toast = useToast()
+// const toast = useToast()
 const router = useRouter()
 const { is, can } = usePermissions()
 
-const handleSubmit = async (event: FormSubmitEvent<FormSchema>) => {
+const handleSubmit = async (event: any) => {
   if (state.login_step === 1) {
     state.login_step = 2
     return
@@ -142,11 +142,11 @@ const handleSubmit = async (event: FormSubmitEvent<FormSchema>) => {
     app.setUser(data)
     router.push('/')
   } catch (error) {
-    toast.add({
-      title: t('error'),
-      description: t('login_failed'),
-      color: 'error',
-    })
+    // toast.add({
+    //   title: t('error'),
+    //   description: t('login_failed'),
+    //   color: 'error',
+    // })
   } finally {
     loading.value = false
   }
