@@ -1,7 +1,7 @@
 <template>
   <nav class="sticky top-4 z-40 bg-white dark:bg-[#0b14374d]">
     <div
-      class="relative h-[48px] flex flex-row flex-wrap items-center justify-between gap-2 py-2"
+      class="relative h-12 flex flex-row flex-wrap items-center justify-between gap-2 py-2"
     >
       <button
         icon="i-lucide-menu"
@@ -20,12 +20,8 @@
         icon="i-carbon-search"
         :placeholder="t('search')"
         variant="outline"
-        class="flex-grow"
+        class="grow"
       />
-      <!-- Button dark mode toggle -->
-      <div>
-        <ColorModeButton />
-      </div>
       <!-- Profile and dropdown -->
       <Menu as="div" class="relative inline-block text-left">
         <MenuButton>
@@ -80,6 +76,9 @@
                 >
                   Log Out
                 </p>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <ColorModeButton />
               </MenuItem>
             </div>
           </MenuItems>

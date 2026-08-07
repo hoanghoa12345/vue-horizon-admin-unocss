@@ -36,7 +36,7 @@ onMounted(() => {
 <template>
   <NuxtLayout>
     <div class="py-4 flex justify-between items-center">
-      <h4>{{ t('my_drive') }}</h4>
+      <h4 class="dark:text-white">{{ t('my_drive') }}</h4>
       <div data-component="Tabs" :items="items" color="secondary" />
     </div>
     <div>
