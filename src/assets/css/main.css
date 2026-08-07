@@ -2,6 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme {
-    --font-sans: 'Arial', sans-serif;
-}

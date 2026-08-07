@@ -4,10 +4,11 @@ import FolderGridLayout from '~/components/FolderLayouts/FolderGridLayout.vue'
 import FolderListLayout from '~/components/FolderLayouts/FolderListLayout.vue'
 import { useAppStore } from '~/stores/app'
 
-const t = (i: string) => {
-  return i
-}
+const { t } = useI18n()
 const app = useAppStore()
+const route = useRoute();
+const router = useRouter();
+const query = route.query;
 
 const items = ref([
   { value: 'list', icon: 'i-lucide-layout-list' },
@@ -25,12 +26,18 @@ const active = computed({
     app.currentView = tab
   },
 })
+
+onMounted(() => {
+  if (!query.user) {
+    router.replace('/login')
+  }
+})
 </script>
 <template>
   <NuxtLayout>
     <div class="py-4 flex justify-between items-center">
       <h4>{{ t('my_drive') }}</h4>
-      <UTabs v-model="active" :items="items" color="secondary" />
+      <div data-component="Tabs" :items="items" color="secondary" />
     </div>
     <div>
       <FolderGridLayout v-if="active === 'grid'" />

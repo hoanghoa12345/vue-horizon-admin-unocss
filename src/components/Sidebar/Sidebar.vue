@@ -6,11 +6,11 @@
     <div
       class="flex flex-col border-r h-screen overflow-y-auto border-gray-200 dark:border-gray-700 w-[68px] bg-white dark:bg-slate-800 z-50">
       <div class="flex items-center justify-center pt-4">
-        <UTooltip :text="t('my_drive')">
+        <div :text="t('my_drive')">
           <NuxtLink to="/">
             <Logo size="30" color="white" />
           </NuxtLink>
-        </UTooltip>
+        </div>
       </div>
 
       <div class="mt-4 flex-1">
@@ -27,7 +27,7 @@
     ? ' bg-gray-200 dark:bg-slate-600 '
     : 'bg-transparent'
     " class="rounded-lg p-3 hover:bg-gray-200">
-                  <UIcon class="size-5" :name="route.icon" />
+                  <div data-component="Icon" class="size-5" :name="route.icon" />
                 </div>
                 <p class="leading-1 flex text-xs">
                   {{ route.name }}
@@ -47,7 +47,7 @@
     ? ' bg-gray-200 dark:bg-slate-600 '
     : 'bg-transparent'
     " class="rounded-lg p-3 hover:bg-gray-200">
-                <UIcon class="size-5" :name="route.icon" />
+                <div data-component="Icon" class="size-5" :name="route.icon" />
               </div>
               <p class="leading-1 flex text-xs">
                 {{ route.name }}
@@ -59,10 +59,10 @@
 
       <div class="flex flex-col pb-4 mb-16 lg:mb-0">
         <div class="mt-4 flex items-center px-4">
-          <UButton icon="i-lucide-message-circle-question-mark" size="lg" color="neutral" variant="ghost" />
+          <button icon="i-lucide-message-circle-question-mark" size="lg" color="neutral" variant="ghost" />
         </div>
         <div class="mt-4 flex items-center px-4">
-          <UButton icon="i-lucide-panel-right" size="lg" color="neutral" variant="ghost"
+          <button icon="i-lucide-panel-right" size="lg" color="neutral" variant="ghost"
             @click="$emit('onToggleContentSidebar')" />
         </div>
       </div>
@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { TransitionRoot } from '@headlessui/vue'
 import HomeSidebar from './HomeSidebar.vue'
 
@@ -96,9 +96,7 @@ const props = defineProps({
   openContentSidebar: Boolean,
 })
 const emit = defineEmits(['onClose', 'onToggleContentSidebar'])
-const t = (i: string) => {
-  return i;
-}
+const { t } = useI18n()
 const routes: RouteItem[] = [
   {
     icon: 'i-lucide-home',

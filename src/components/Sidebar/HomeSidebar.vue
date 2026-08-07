@@ -11,7 +11,7 @@
             <div
               class="flex items-center py-2 px-3 hover:dark:bg-neutral-600 hover:bg-neutral-200 rounded-xl"
             >
-              <UIcon class="size-4" :name="item.icon" />
+              <div data-component="Icon" class="size-4" :name="item.icon" />
               <span class="ml-2 text-[15px] dark:text-white/80">{{
                 item.name
               }}</span>
@@ -22,7 +22,7 @@
       <div>
         <div class="flex items-center justify-between px-6 py-4">
           <h4 class="text-sm font-semibold">{{ t('quick_access') }}</h4>
-          <UIcon class="size-4" name="i-lucide-plus" />
+          <div data-component="Icon" class="size-4" name="i-lucide-plus" />
         </div>
       </div>
     </div>
@@ -30,13 +30,13 @@
     <div>
       <div class="flex space-x-2 bg-blue-700/60 text-blue-300 items-center px-6 py-3 mx-2 my-2 rounded-xl">
         <div class="border-[3px] border-blue-600/80 p-2 rounded-full">
-          <UIcon class="size-3" name="i-lucide-chart-pie" />
+          <div data-component="Icon" class="size-3" name="i-lucide-chart-pie" />
         </div>
         <div class="flex-1">
           <span class="text-[12px]">1.5GB of 1TB</span>
         </div>
         <div>
-          <UIcon class="size-6" name="i-lucide-chevron-up" />
+          <div data-component="Icon" class="size-6" name="i-lucide-chevron-up" />
         </div>
       </div>
     </div>
@@ -45,9 +45,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
 
-const t = (i: string) => {
-  return i
-}
+const { t } = useI18n()
 
 const items = ref([
   {
