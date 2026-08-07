@@ -4,7 +4,7 @@
     leave-to="-translate-x-96"
     class="mt-16 lg:mt-0 duration-175 fixed z-50 h-screen flex justify-between transition-all xl:translate-x-0 dark:bg-slate-800 dark:text-white md:z-50 lg:z-50 xl:z-0 border-t border-gray-200 dark:border-gray-700">
     <div
-      class="flex flex-col border-r h-screen overflow-y-auto border-gray-200 dark:border-gray-700 w-[68px] bg-white dark:bg-slate-800 z-50">
+      class="flex flex-col border-r h-screen overflow-y-auto border-gray-200 dark:border-gray-700 w-17 bg-white dark:bg-slate-800 z-50">
       <div class="flex items-center justify-center pt-4">
         <div :text="t('my_drive')">
           <NuxtLink to="/">
@@ -18,36 +18,34 @@
           <li v-for="route in routes" @click="navigate(route.routeName)" class="">
             <div v-if="route.isPopover"
               class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
-              <UPopover :content="{
-    align: 'center',
-    side: 'right',
-    sideOffset: 8,
-  }" modal>
-                <div :class="checkIsActiveRoute(route.routeName)
-    ? ' bg-gray-200 dark:bg-slate-600 '
-    : 'bg-transparent'
-    " class="rounded-lg p-3 hover:bg-gray-200">
-                  <div data-component="Icon" class="size-5" :name="route.icon" />
-                </div>
-                <p class="leading-1 flex text-xs">
-                  {{ route.name }}
-                </p>
-                <template #content>
+              <Popover align="left">
+                <template #trigger>
+                  <div :class="checkIsActiveRoute(route.routeName)
+                    ? ' bg-gray-200 dark:bg-slate-600 '
+                    : 'bg-transparent'
+                    " class="rounded-lg p-3 hover:bg-gray-200">
+                    <component :is="route.icon" class="size-5" />
+                  </div>
+                  <p class="leading-1 flex text-xs">
+                    {{ route.name }}
+                  </p>
+                </template>
+                <template #content="{ close }">
                   <div class="size-48 m-4 inline-flex">
                     <div>
                       {{ route.name }}
                     </div>
                   </div>
                 </template>
-              </UPopover>
+              </Popover>
             </div>
             <div v-else
               class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
               <div :class="checkIsActiveRoute(route.routeName)
-    ? ' bg-gray-200 dark:bg-slate-600 '
-    : 'bg-transparent'
-    " class="rounded-lg p-3 hover:bg-gray-200">
-                <div data-component="Icon" class="size-5" :name="route.icon" />
+                ? ' bg-gray-200 dark:bg-slate-600 '
+                : 'bg-transparent'
+                " class="rounded-lg p-3 hover:bg-gray-200">
+                <component :is="route.icon" class="size-5" />
               </div>
               <p class="leading-1 flex text-xs">
                 {{ route.name }}
@@ -70,11 +68,11 @@
     <TransitionRoot :show="openContentSidebar" enter="transition ease-in-out duration-300 transform"
       enter-from="-translate-x-96" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform"
       leave-from="translate-x-0" leave-to="-translate-x-96"
-      class="w-[250px] bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-gray-700 z-40 overflow-y-auto">
-      <div v-if="currentRoute.routeName == 'home'">
+      class="w-62.5 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-gray-700 z-40 overflow-y-auto">
+      <div v-if="currentRoute?.routeName == 'home'">
         <HomeSidebar />
       </div>
-      <div v-else-if="currentRoute.routeName == 'folders'">Folders</div>
+      <div v-else-if="currentRoute?.routeName == 'folders'">Folders</div>
     </TransitionRoot>
   </TransitionRoot>
 </template>
@@ -83,9 +81,10 @@
 import { ref } from 'vue'
 import { TransitionRoot } from '@headlessui/vue'
 import HomeSidebar from './HomeSidebar.vue'
+import { IconBell, IconFolders, IconGridDots, IconHome, type Icon } from '@tabler/icons-vue'
 
 type RouteItem = {
-  icon: string
+  icon: Icon
   name: string
   routeName: string
   isPopover?: boolean
@@ -99,34 +98,34 @@ const emit = defineEmits(['onClose', 'onToggleContentSidebar'])
 const { t } = useI18n()
 const routes: RouteItem[] = [
   {
-    icon: 'i-lucide-home',
+    icon: IconHome,
     name: 'Home',
     routeName: 'home',
     isPopover: false,
   },
   {
-    icon: 'i-lucide-folders',
+    icon: IconFolders,
     name: 'Folders',
     routeName: 'folders',
     isPopover: false,
   },
   {
-    icon: 'i-lucide-bell',
+    icon: IconBell,
     name: 'Activity',
     routeName: 'activity',
     isPopover: true,
   },
   {
-    icon: 'i-lucide-grip',
+    icon: IconGridDots,
     name: 'More',
     routeName: 'more',
     isPopover: true,
   },
 ]
-const currentRoute = ref<RouteItem>(routes[0])
+const currentRoute = ref<RouteItem | undefined>(routes[0]!)
 
 function checkIsActiveRoute(routeName: string): boolean {
-  return currentRoute.value.routeName === routeName
+  return currentRoute.value?.routeName === routeName
 }
 
 function navigate(routeName: string): void {

@@ -6,7 +6,7 @@
         ? 'bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-white'
         : 'text-gray-500 hover:text-gray-900 dark:hover:text-white',
     ]">
-      <IconBrightnessHalf stroke="{2}" />
+      <IconBrightnessAuto />
     </button>
     <button @click="setTheme('light')" :class="[
       'px-3 py-1.5 text-xs font-medium rounded-md transition-colors',
@@ -14,7 +14,7 @@
         ? 'bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-white'
         : 'text-gray-500 hover:text-gray-900 dark:hover:text-white',
     ]">
-      <IconBrightness2 stroke="{2}" />
+      <IconBrightness2 />
     </button>
     <button @click="setTheme('dark')" :class="[
       'px-3 py-1.5 text-xs font-medium rounded-md transition-colors',
@@ -22,7 +22,7 @@
         ? 'bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-white'
         : 'text-gray-500 hover:text-gray-900 dark:hover:text-white',
     ]">
-      <IconMoon stroke="{2}" />
+      <IconMoon />
     </button>
   </div>
 </template>
@@ -30,7 +30,7 @@
 <script setup>
 import {
   IconBrightness2,
-  IconBrightnessHalf,
+  IconBrightnessAuto,
   IconMoon,
 } from '@tabler/icons-vue'
 import { ref, onMounted } from 'vue'

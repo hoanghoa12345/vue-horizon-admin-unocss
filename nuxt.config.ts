@@ -1,14 +1,29 @@
-import tailwindcss from "@tailwindcss/vite";
+import tailwindcss from '@tailwindcss/vite'
 
 export default defineNuxtConfig({
+  app: {
+    head: {
+      title: 'Cloud Drive',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          name: 'description',
+          content: 'Cloud Drive - Your cloud storage made easy',
+        },
+      ],
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    },
+    baseURL: '/',
+    buildAssetsDir: '/_nuxt/',
+    cdnURL: '',
+  },
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   srcDir: 'src/',
   modules: ['@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
   vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+    plugins: [tailwindcss()],
   },
 })

@@ -8,13 +8,11 @@
       <div class="px-4">
         <ul>
           <li v-for="item in items">
-            <div
-              class="flex items-center py-2 px-3 hover:dark:bg-neutral-600 hover:bg-neutral-200 rounded-xl"
-            >
-              <div data-component="Icon" class="size-4" :name="item.icon" />
+            <div class="flex items-center py-2 px-3 hover:dark:bg-neutral-600 hover:bg-neutral-200 rounded-xl">
+              <component :is="item.icon" class="size-4" />
               <span class="ml-2 text-[15px] dark:text-white/80">{{
                 item.name
-              }}</span>
+                }}</span>
             </div>
           </li>
         </ul>
@@ -43,6 +41,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+import { IconFileDownload, IconFiles, IconPhoto, IconTrash, IconUsers } from '@tabler/icons-vue';
 import { ref } from 'vue'
 
 const { t } = useI18n()
@@ -50,23 +49,23 @@ const { t } = useI18n()
 const items = ref([
   {
     name: t('all_files'),
-    icon: 'i-lucide-files',
+    icon: IconFiles,
   },
   {
     name: t('photos'),
-    icon: 'i-lucide-image',
+    icon: IconPhoto,
   },
   {
     name: t('shared'),
-    icon: 'i-lucide-users',
+    icon: IconUsers,
   },
   {
     name: t('file_request'),
-    icon: 'i-lucide-file-down',
+    icon: IconFileDownload,
   },
   {
     name: t('deleted_files'),
-    icon: 'i-lucide-trash',
+    icon: IconTrash,
   },
 ])
 </script>

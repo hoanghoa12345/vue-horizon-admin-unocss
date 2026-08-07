@@ -16,7 +16,7 @@
     </header>
     <div
       class="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-12 lg:mb-10 lg:items-center lg:justify-start">
-      <button type="button" class="btn rounded-lg">Login with OAuth</button>
+      <button type="button" class="btn rounded-lg">Continue with OAuth</button>
     </div>
   </NuxtLayout>
 </template>
