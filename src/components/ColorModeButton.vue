@@ -1,12 +1,12 @@
 <template>
-  <div class="inline-flex rounded-lg bg-gray-100 dark:bg-gray-800 p-1 border border-gray-200 dark:border-gray-700">
+  <div class="inline-flex justify-center rounded-lg bg-gray-100 dark:bg-gray-800 p-1 border border-gray-200 dark:border-gray-700">
     <button @click="setTheme('system')" :class="[
       'px-3 py-1.5 text-xs font-medium rounded-md transition-colors',
       currentTheme === 'system'
         ? 'bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-white'
         : 'text-gray-500 hover:text-gray-900 dark:hover:text-white',
     ]">
-      <IconBrightnessAuto />
+      <i class="ti ti-brightness-auto text-xl"></i>
     </button>
     <button @click="setTheme('light')" :class="[
       'px-3 py-1.5 text-xs font-medium rounded-md transition-colors',
@@ -14,7 +14,7 @@
         ? 'bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-white'
         : 'text-gray-500 hover:text-gray-900 dark:hover:text-white',
     ]">
-      <IconBrightness2 />
+      <i class="ti ti-brightness-2 text-xl"></i>
     </button>
     <button @click="setTheme('dark')" :class="[
       'px-3 py-1.5 text-xs font-medium rounded-md transition-colors',
@@ -22,17 +22,12 @@
         ? 'bg-white dark:bg-gray-900 shadow-sm text-gray-900 dark:text-white'
         : 'text-gray-500 hover:text-gray-900 dark:hover:text-white',
     ]">
-      <IconMoon />
+      <i class="ti ti-moon text-xl"></i>
     </button>
   </div>
 </template>
 
 <script setup>
-import {
-  IconBrightness2,
-  IconBrightnessAuto,
-  IconMoon,
-} from '@tabler/icons-vue'
 import { ref, onMounted } from 'vue'
 
 const currentTheme = ref('system')

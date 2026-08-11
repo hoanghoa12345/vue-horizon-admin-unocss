@@ -12,7 +12,10 @@ export default defineNuxtConfig({
           content: 'Cloud Drive - Your cloud storage made easy',
         },
       ],
-      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+        { rel: 'stylesheet', href: 'https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css' }
+      ],
     },
     baseURL: '/',
     buildAssetsDir: '/_nuxt/',

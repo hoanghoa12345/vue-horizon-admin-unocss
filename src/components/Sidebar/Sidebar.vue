@@ -24,7 +24,7 @@
                     ? ' bg-gray-200 dark:bg-slate-600 '
                     : 'bg-transparent'
                     " class="rounded-lg p-3 hover:bg-gray-200">
-                    <component :is="route.icon" class="size-5" />
+                    <i :class="route.icon" class="size-5" />
                   </div>
                   <p class="leading-1 flex text-xs">
                     {{ route.name }}
@@ -45,7 +45,7 @@
                 ? ' bg-gray-200 dark:bg-slate-600 '
                 : 'bg-transparent'
                 " class="rounded-lg p-3 hover:bg-gray-200">
-                <component :is="route.icon" class="size-5" />
+                <i :class="route.icon" class="size-5" />
               </div>
               <p class="leading-1 flex text-xs">
                 {{ route.name }}
@@ -81,10 +81,9 @@
 import { ref } from 'vue'
 import { TransitionRoot } from '@headlessui/vue'
 import HomeSidebar from './HomeSidebar.vue'
-import { IconBell, IconFolders, IconGridDots, IconHome, type Icon } from '@tabler/icons-vue'
 
 type RouteItem = {
-  icon: Icon
+  icon: string
   name: string
   routeName: string
   isPopover?: boolean
@@ -98,25 +97,25 @@ const emit = defineEmits(['onClose', 'onToggleContentSidebar'])
 const { t } = useI18n()
 const routes: RouteItem[] = [
   {
-    icon: IconHome,
+    icon: 'ti ti-home',
     name: 'Home',
     routeName: 'home',
     isPopover: false,
   },
   {
-    icon: IconFolders,
+    icon: 'ti ti-folders',
     name: 'Folders',
     routeName: 'folders',
     isPopover: false,
   },
   {
-    icon: IconBell,
+    icon: 'ti ti-bell',
     name: 'Activity',
     routeName: 'activity',
     isPopover: true,
   },
   {
-    icon: IconGridDots,
+    icon: 'ti ti-grid-dots',
     name: 'More',
     routeName: 'more',
     isPopover: true,

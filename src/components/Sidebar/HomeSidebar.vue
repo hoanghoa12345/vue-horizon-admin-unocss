@@ -9,10 +9,8 @@
         <ul>
           <li v-for="item in items">
             <div class="flex items-center py-2 px-3 hover:dark:bg-neutral-600 hover:bg-neutral-200 rounded-xl">
-              <component :is="item.icon" class="size-4" />
-              <span class="ml-2 text-[15px] dark:text-white/80">{{
-                item.name
-                }}</span>
+              <i :class="item.icon" class="size-4" />
+              <span class="ml-2 text-[15px] dark:text-white/80">{{item.name}}</span>
             </div>
           </li>
         </ul>
@@ -20,7 +18,7 @@
       <div>
         <div class="flex items-center justify-between px-6 py-4">
           <h4 class="text-sm font-semibold">{{ t('quick_access') }}</h4>
-          <div data-component="Icon" class="size-4" name="i-lucide-plus" />
+          <PlusIcon />
         </div>
       </div>
     </div>
@@ -28,20 +26,19 @@
     <div>
       <div class="flex space-x-2 bg-blue-700/60 text-blue-300 items-center px-6 py-3 mx-2 my-2 rounded-xl">
         <div class="border-[3px] border-blue-600/80 p-2 rounded-full">
-          <div data-component="Icon" class="size-3" name="i-lucide-chart-pie" />
+          <i class="ti ti-chart-pie-2 size-3"></i>
         </div>
         <div class="flex-1">
           <span class="text-[12px]">1.5GB of 1TB</span>
         </div>
         <div>
-          <div data-component="Icon" class="size-6" name="i-lucide-chevron-up" />
+          <i class="ti ti-chevron-up size-6"></i>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script lang="ts" setup>
-import { IconFileDownload, IconFiles, IconPhoto, IconTrash, IconUsers } from '@tabler/icons-vue';
 import { ref } from 'vue'
 
 const { t } = useI18n()
@@ -49,23 +46,23 @@ const { t } = useI18n()
 const items = ref([
   {
     name: t('all_files'),
-    icon: IconFiles,
+    icon: 'ti ti-folders',
   },
   {
     name: t('photos'),
-    icon: IconPhoto,
+    icon: 'ti ti-photo',
   },
   {
     name: t('shared'),
-    icon: IconUsers,
+    icon: 'ti ti-users',
   },
   {
     name: t('file_request'),
-    icon: IconFileDownload,
+    icon: 'ti ti-file-download',
   },
   {
     name: t('deleted_files'),
-    icon: IconTrash,
+    icon: 'ti ti-trash',
   },
 ])
 </script>
