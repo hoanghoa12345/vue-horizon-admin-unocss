@@ -18,7 +18,7 @@
       <div>
         <div class="flex items-center justify-between px-6 py-4">
           <h4 class="text-sm font-semibold">{{ t('quick_access') }}</h4>
-          <PlusIcon />
+          <i class="ti ti-plus text-lg"></i>
         </div>
       </div>
     </div>

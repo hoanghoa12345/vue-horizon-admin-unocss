@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@plugin "daisyui";
 
 @font-face {
     font-family: 'Inter Variable';
@@ -19,6 +18,8 @@
 
 .dark {
     --color-primary-bg: #1d1d21;
+    background-color: var(--color-primary-bg);
+    color: white;
 }
 
 @theme {
