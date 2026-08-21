@@ -1,11 +1,11 @@
 <template>
-  <nav class="sticky top-4 z-40 bg-white dark:bg-[#0b14374d]">
+  <nav class="sticky top-4 z-40">
     <div class="relative h-12 flex flex-row flex-wrap items-center justify-between gap-2 py-2">
       <button type="button" @click="emit('menu')" class="ml-px dark:text-white">
         <i class="ti ti-menu text-xl"></i>
       </button>
       <button
-        class="text-white bg-brand box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+        class="text-white bg-neutral-900 text-white dark:bg-white dark:text-black box-border border border-transparent hover:bg-neutral-800 focus:ring-4 focus:ring-blue-500 shadow-xs font-medium leading-5 rounded-md text-sm px-4 py-2.5 focus:outline-none">
         {{ t('new') }}
         <i class="ti ti-plus"></i>
       </button>
@@ -18,7 +18,6 @@
         </svg>
         <input type="search" required :placeholder="t('search')" />
       </label>
-      <!-- Profile and dropdown -->
       <Dropdown align="right">
         <template #trigger="{ isOpen }">
           <button>

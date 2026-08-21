@@ -23,5 +23,6 @@
   "shared": "Shared",
   "file_request": "File request",
   "deleted_files": "Deleted files",
-  "quick_access": "Quick access"
+  "quick_access": "Quick access",
+  "continue_with_oauth": "Continue with OAuth"
 }

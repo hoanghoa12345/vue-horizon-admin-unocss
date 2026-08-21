@@ -4,19 +4,23 @@
       <nav
         class="flex justify-between items-center border-b border-gray-200 px-4 py-2 dark:border-gray-700 dark:bg-gray-800 w-full">
         <div class="flex gap-2 items-center">
-          <Logo size="40" />
+          <Logo size="40"/>
           <h2 class="text-2xl font-bold dark:text-white">
             {{ t('cloud_drive') }}
           </h2>
         </div>
         <div>
-          <button icon="i-lucide-globe" size="md" color="neutral" variant="ghost" />
+          <button type="button">
+            <i class="ti ti-world"></i>
+          </button>
         </div>
       </nav>
     </header>
     <div
       class="mt-16 mb-16 flex h-full w-full items-center justify-center px-2 md:mx-0 md:px-12 lg:mb-10 lg:items-center lg:justify-start">
-      <button type="button" class="btn rounded-lg">Continue with OAuth</button>
+      <button type="button"
+        class="text-white bg-blue-500 box-border border border-transparent hover:bg-blue-500-strong focus:ring-4 focus:ring-blue-500-medium shadow-xs font-medium leading-5 rounded-md text-sm px-4 py-2.5 focus:outline-none">{{
+              t("continue_with_oauth") }}</button>
     </div>
   </NuxtLayout>
 </template>

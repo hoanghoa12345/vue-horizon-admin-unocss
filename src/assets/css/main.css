@@ -16,12 +16,23 @@
     --color-primary-bg: #f9f9fb;
 }
 
-.dark {
-    --color-primary-bg: #1d1d21;
-    background-color: var(--color-primary-bg);
-    color: white;
+@theme {
+    --color-primary-bg: var(--color-primary-bg);
 }
 
-@theme {
-  --color-primary-bg: var(--color-primary-bg);
+@layer base {
+    body {
+        background-color: #1d1d21;
+        color: white;
+    }
+
+    :not(.dark) body {
+        background-color: #f9f9fb;
+        color: #1d1d21;
+    }
+}
+
+.dark {
+    background-color: #1d1d21;
+    color: white;
 }
