@@ -1,19 +1,18 @@
 <template>
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+    <div class="grid grid-cols-2 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
       <div 
         v-for="item in items" 
         :key="item.id"
-        class="bg-default rounded-lg shadow-md hover:shadow-lg hover:bg-elevated transition-all duration-300 p-4 border border-gray-200 cursor-pointer group"
+        class="hover:shadow-lg hover:bg-elevated transition-all duration-300 px-4 py-6 cursor-pointer group bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
         @click="openFolder(item)"
       >
         <div class="flex flex-col items-center text-center">
-          <!-- Folder Icon -->
-          <div class="w-16 h-16 mb-3 group-hover:scale-110 transition-transform duration-200">
+          <div class="w-24 h-24 mb-3 group-hover:scale-110 transition-transform duration-200">
             <svg 
               viewBox="0 0 24 24" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
-              class="w-full h-full text-blue-500 group-hover:text-blue-600"
+              class="w-full h-full text-blue-400 group-hover:text-blue-400"
             >
               <path 
                 d="M2 6C2 4.89543 2.89543 4 4 4H9L11 6H20C21.1046 6 22 6.89543 22 8V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6Z" 
@@ -21,7 +20,7 @@
               />
             </svg>
           </div>
-          <h3 class="text-sm font-medium text-gray-800 group-hover:text-blue-700 mb-1 truncate w-full">{{ item.name }}</h3>
+          <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-100 group-hover:text-blue-700 dark:group-hover:text-blue-400 mb-1 truncate w-full">{{ item.name }}</h3>
           <p class="text-xs text-gray-500">{{ item.itemCount }} items</p>
           <p class="text-xs text-gray-400">{{ item.lastModified }}</p>
         </div>

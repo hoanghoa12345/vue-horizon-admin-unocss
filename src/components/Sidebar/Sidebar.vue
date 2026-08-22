@@ -2,13 +2,13 @@
   <TransitionRoot :show="open" enter="transition ease-in-out duration-300 transform" enter-from="-translate-x-96"
     enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform" leave-from="translate-x-0"
     leave-to="-translate-x-96"
-    class="mt-16 lg:mt-0 duration-175 fixed z-50 h-screen flex justify-between transition-all xl:translate-x-0 dark:bg-slate-800 dark:text-white md:z-50 lg:z-50 xl:z-0 border-t border-gray-200 dark:border-gray-700">
+    class="mt-16 lg:mt-0 duration-175 fixed z-50 h-screen flex justify-between transition-all xl:translate-x-0 dark:bg-neutral-800 dark:text-white md:z-50 lg:z-50 xl:z-0 border-t border-gray-200 dark:border-neutral-700">
     <div
-      class="flex flex-col border-r h-screen overflow-y-auto border-gray-200 dark:border-gray-700 w-17 bg-white dark:bg-slate-800 z-50">
+      class="flex flex-col border-r h-screen overflow-y-auto border-gray-200 dark:border-neutral-700 w-17 bg-neutral-100 dark:bg-neutral-800 z-50">
       <div class="flex items-center justify-center pt-4">
-        <div :text="t('my_drive')">
+        <div :aria-label="t('my_drive')">
           <NuxtLink to="/">
-            <Logo size="30" color="white" />
+            <Logo width="36"/>
           </NuxtLink>
         </div>
       </div>
@@ -20,15 +20,18 @@
               class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
               <Popover align="left">
                 <template #trigger>
-                  <div :class="checkIsActiveRoute(route.routeName)
-                    ? ' bg-gray-200 dark:bg-slate-600 '
-                    : 'bg-transparent'
-                    " class="rounded-lg p-3 hover:bg-gray-200">
-                    <i :class="route.icon" class="size-5" />
+                  <div
+                    class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
+                    <div :class="checkIsActiveRoute(route.routeName)
+                      ? ' bg-gray-200 dark:bg-neutral-600 '
+                      : 'bg-transparent'
+                      " class="rounded-lg p-3 hover:bg-gray-200 dark:hover:bg-neutral-600">
+                      <i :class="route.icon" class="text-xl" />
+                    </div>
+                    <p class="leading-1 flex text-xs">
+                      {{ route.name }}
+                    </p>
                   </div>
-                  <p class="leading-1 flex text-xs">
-                    {{ route.name }}
-                  </p>
                 </template>
                 <template #content="{ close }">
                   <div class="size-48 m-4 inline-flex">
@@ -42,10 +45,10 @@
             <div v-else
               class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
               <div :class="checkIsActiveRoute(route.routeName)
-                ? ' bg-gray-200 dark:bg-slate-600 '
+                ? ' bg-gray-200 dark:bg-neutral-600 '
                 : 'bg-transparent'
-                " class="rounded-lg p-3 hover:bg-gray-200">
-                <i :class="route.icon" class="size-5" />
+                " class="rounded-lg p-3 hover:bg-gray-200 dark:hover:bg-neutral-600">
+                <i :class="route.icon" class="text-xl" />
               </div>
               <p class="leading-1 flex text-xs">
                 {{ route.name }}
@@ -57,18 +60,21 @@
 
       <div class="flex flex-col pb-4 mb-16 lg:mb-0">
         <div class="mt-4 flex items-center px-4">
-          <button icon="i-lucide-message-circle-question-mark" size="lg" color="neutral" variant="ghost" />
+          <button type="button">
+            <i class="ti ti-help-circle text-xl"></i>
+          </button>
         </div>
         <div class="mt-4 flex items-center px-4">
-          <button icon="i-lucide-panel-right" size="lg" color="neutral" variant="ghost"
-            @click="$emit('onToggleContentSidebar')" />
+          <button type="button" @click="$emit('onToggleContentSidebar')">
+            <i class="ti ti-layout-sidebar-left-collapse text-xl"></i>
+          </button>
         </div>
       </div>
     </div>
     <TransitionRoot :show="openContentSidebar" enter="transition ease-in-out duration-300 transform"
       enter-from="-translate-x-96" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform"
       leave-from="translate-x-0" leave-to="-translate-x-96"
-      class="w-62.5 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-gray-700 z-40 overflow-y-auto">
+      class="w-62.5 bg-neutral-100 dark:bg-neutral-800 border-r border-gray-200 dark:border-neutral-700 z-40 overflow-y-auto">
       <div v-if="currentRoute?.routeName == 'home'">
         <HomeSidebar />
       </div>

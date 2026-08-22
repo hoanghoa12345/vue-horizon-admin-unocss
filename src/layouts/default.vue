@@ -2,8 +2,8 @@
   <div class="flex h-screen w-full">
     <Sidebar :open="appStore.sidebar.open" :open-content-sidebar="appStore.sidebar.openContentSidebar"
       @on-close="appStore.toggleSidebar" @on-toggle-content-sidebar="appStore.toggleContentSidebar" />
-    <div class="h-full w-full dark:bg-gray-900">
-      <main class="mx-3 h-full flex-none transition-all md:px-2" :class="computedMarginSidebar">
+    <div class="h-full w-full bg-white dark:bg-neutral-900">
+      <main class="h-full flex-none transition-all" :class="computedMarginSidebar">
         <div class="h-full">
           <Navbar @menu="toggleSidebar" />
           <div class="pt-5 mx-auto mb-auto h-full min-h-[48vh] p-2 md:pr-2">

@@ -4,4 +4,5 @@ export type User = {
   homedir?: string
   username: string
   name: string
+  email: string
 }

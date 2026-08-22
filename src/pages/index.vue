@@ -9,23 +9,7 @@ const app = useAppStore()
 const route = useRoute();
 const router = useRouter();
 const query = route.query;
-
-const items = ref([
-  { value: 'list', icon: 'i-lucide-layout-list' },
-  {
-    value: 'grid',
-    icon: 'i-lucide-layout-grid',
-  },
-])
-
-const active = computed({
-  get() {
-    return app.currentView
-  },
-  set(tab) {
-    app.currentView = tab
-  },
-})
+const currentView = ref<'grid' | 'list'>('grid')
 
 onMounted(() => {
   if (!query.user) {
@@ -35,13 +19,13 @@ onMounted(() => {
 </script>
 <template>
   <NuxtLayout>
-    <div class="py-4 flex justify-between items-center">
-      <h4 class="dark:text-white">{{ t('my_drive') }}</h4>
-      <div data-component="Tabs" :items="items" color="secondary" />
+    <div class="py-4 px-3 flex justify-between items-center">
+      <h4 class="dark:text-white text-2xl font-medium">{{ t('all_files') }}</h4>
+      <SwitchLayout v-model="currentView" />
     </div>
-    <div>
-      <FolderGridLayout v-if="active === 'grid'" />
-      <FolderListLayout v-else-if="active === 'list'" />
+    <div class="flex-1 px-3 overflow-y-auto">
+      <FolderGridLayout v-if="currentView === 'grid'" />
+      <FolderListLayout v-else-if="currentView === 'list'" />
     </div>
   </NuxtLayout>
 </template>

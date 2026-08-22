@@ -11,8 +11,9 @@ export const useAppStore = defineStore('appStore', () => {
   const user = ref<User>({
     role: 'guest',
     permissions: [],
-    name: '',
+    name: 'Demo User',
     username: '',
+    email: 'test@cloud-drive.io',
   })
   const cwd = ref({
     location: '/',
@@ -47,6 +48,17 @@ export const useAppStore = defineStore('appStore', () => {
   const toggleContentSidebar = () => {
     sidebar.value.openContentSidebar = !sidebar.value.openContentSidebar
   }
+
+  const logout = () => {
+    user.value = {
+      role: 'guest',
+      permissions: [],
+      name: '',
+      username: '',
+      email: ''
+    }
+  }
+
   return {
     initialized,
     config,
@@ -63,5 +75,6 @@ export const useAppStore = defineStore('appStore', () => {
     setCsrfToken,
     setInitialized,
     hasPermission,
+    logout
   }
 })

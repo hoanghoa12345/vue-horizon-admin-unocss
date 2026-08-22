@@ -24,5 +24,13 @@
   "file_request": "File request",
   "deleted_files": "Deleted files",
   "quick_access": "Quick access",
-  "continue_with_oauth": "Continue with OAuth"
+  "continue_with_oauth": "Continue with OAuth",
+  "select_language": "Select language",
+  "settings": "Settings",
+  "manage_account": "Manage Account",
+  "log_out": "Log Out",
+  "name": "Name",
+  "size": "Size",
+  "type": "Type",
+  "last_modified": "Last modified"
 }
