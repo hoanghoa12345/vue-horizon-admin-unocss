@@ -1,7 +1,7 @@
 <template>
   <nav class="sticky top-0 z-10">
-    <div class="relative px-4 py-2 flex flex-row flex-wrap items-center justify-between gap-4 py-2 bg-white dark:bg-neutral-900">
-      <button type="button" @click="emit('menu')" class="ml-px dark:text-white hidden md:flex">
+    <div class="relative px-4 py-2 flex flex-row items-center justify-between gap-4 bg-white dark:bg-neutral-900">
+      <button type="button" @click="emit('menu')" class="ml-px dark:text-white flex lg:hidden">
         <i class="ti ti-menu text-xl"></i>
       </button>
       <button
@@ -22,8 +22,10 @@
       </label>
       <Dropdown align="right">
         <template #trigger="{ isOpen }">
-          <button>
-            <img class="h-8 w-8 rounded-xl" src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/3d_4.png" alt="User" />
+          <button type="button"
+            class="inline-flex items-center justify-center gap-2 rounded-xl bg-white text-sm size-8 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:bg-neutral-800 dark:text-white dark:hover:bg-neutral-700">
+            <span class="sr-only">Open user menu</span>
+            <img class="h-full w-full rounded-lg object-cover" :src="app.user.avatar" :alt="app.user.name" />
           </button>
         </template>
         <template #content="{ close }">
@@ -38,8 +40,7 @@
                 <div class="flex items-center gap-2">
                   <p class="text-sm font-bold text-slate-700 dark:text-white">
                   <div class="flex items-center gap-2">
-                    <img class="h-8 w-8 rounded-xl" src="https://cdn.jsdelivr.net/gh/alohe/memojis/png/3d_4.png"
-                      alt="User" />
+                    <img class="h-8 w-8 rounded-xl" :src="app.user.avatar" :alt="app.user.name" />
                     <div class="flex flex-col">
                       <span class="text-md font-normal">{{ app.user.name }}</span>
                       <span class="text-[10px] font-normal text-slate-500 dark:text-white/70">

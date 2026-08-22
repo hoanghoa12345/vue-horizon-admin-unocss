@@ -2,7 +2,7 @@
   <NuxtLayout>
     <header class="sticky top-0 z-40 flex flex-row flex-wrap items-center justify-between">
       <nav
-        class="flex justify-between items-center border-b border-gray-200 px-4 py-2 dark:border-gray-700 dark:bg-gray-800 w-full">
+        class="flex justify-between items-center border-b border-gray-200 px-4 py-2 dark:border-neutral-700 dark:bg-neutral-800 w-full">
         <div class="flex gap-2 items-center">
           <Logo size="40" />
           <h2 class="text-xl font-semibold font-sans dark:text-white">
@@ -12,9 +12,9 @@
         <div>
           <Menu as="div" class="relative inline-block text-left">
             <MenuButton
-              class="inline-flex w-full items-center justify-center gap-x-2 rounded-xl px-4 py-2 text-sm font-medium text-zinc-700 hover:ring-1 ring-zinc-200 hover:bg-zinc-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500">
-              <i class="ti ti-world text-lg"></i>
-              <i class="ti ti-chevron-down size-4 text-zinc-400"></i>
+              class="inline-flex w-full items-center justify-center gap-x-2 rounded-xl px-4 py-2 text-sm font-medium text-zinc-700 hover:ring-1 ring-zinc-200 dark:ring-neutral-700 hover:bg-zinc-50 dark:hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500">
+              <i class="ti ti-world text-lg text-zinc-400 dark:text-slate-100"></i>
+              <i class="ti ti-chevron-down size-4 text-zinc-400 dark:text-slate-100"></i>
             </MenuButton>
 
             <transition enter-active-class="transition duration-100 ease-out"
@@ -22,17 +22,17 @@
               leave-active-class="transition duration-75 ease-in" leave-from-class="transform scale-100 opacity-100"
               leave-to-class="transform scale-95 opacity-0">
               <MenuItems
-                class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-xl bg-white p-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
+                class="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-xl bg-white dark:bg-neutral-700 p-1 shadow-lg ring-1 ring-black/5 focus:outline-none">
                 <div class="px-3 py-2 text-[11px] font-medium text-zinc-400">
                   {{ t("select_language") }}
                 </div>
                 <MenuItem v-for="lang in languages" :key="lang.code" v-slot="{ active }" as="template">
                   <button @click="switchLocale(lang.code)" :class="[
-                    active ? 'bg-zinc-100 text-zinc-900' : 'text-zinc-700',
+                    active ? 'bg-zinc-100 dark:bg-neutral-800 text-zinc-900 dark:text-neutral-100' : 'text-zinc-700 dark:text-neutral-200',
                     'group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm'
                   ]">
                     <span class="flex-1 text-left">{{ lang.label }}</span>
-                    <i v-if="locale === lang.code" class="ti ti-check size-4 text-violet-600"></i>
+                    <i v-if="locale === lang.code" class="ti ti-check size-4 text-violet-600 dark:text-violet-200"></i>
                   </button>
                 </MenuItem>
               </MenuItems>
@@ -46,7 +46,7 @@
       <button type="button" :disabled="loading"
         class="w-full max-w-sm text-white bg-blue-500 box-border border border-transparent hover:bg-blue-500-strong focus:ring-4 focus:ring-blue-500-medium shadow-xs font-medium leading-5 rounded-xl text-sm px-4 py-2.5 focus:outline-none disabled:bg-blue-400 disabled:cursor-not-allowed flex items-center justify-center space-x-2"
         @click="handleOAuth2Login">
-        <span v-if="loading" class="space-x-2"><i class="ti ti-loader animate-spin"></i></span>
+        <span v-if="loading" class="space-x-2 animate-spin"><i class="ti ti-loader"></i></span>
         <span v-else class="space-x-2">{{ t("continue_with_oauth") }}</span>
       </button>
     </div>

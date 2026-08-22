@@ -14,6 +14,7 @@ export const useAppStore = defineStore('appStore', () => {
     name: 'Demo User',
     username: '',
     email: 'test@cloud-drive.io',
+    avatar: 'https://cdn.jsdelivr.net/gh/alohe/memojis/png/3d_4.png',
   })
   const cwd = ref({
     location: '/',
@@ -55,7 +56,8 @@ export const useAppStore = defineStore('appStore', () => {
       permissions: [],
       name: '',
       username: '',
-      email: ''
+      email: '',
+      avatar: '',
     }
   }
 

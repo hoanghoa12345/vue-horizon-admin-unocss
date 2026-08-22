@@ -1,30 +1,42 @@
-import { readonly } from "vue";
+const LOCALES = ["en", "vi", "ar"] as const;
 
-const LOCALES = ["en", "vi"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 const DEFAULT_LOCALE: Locale = "en";
 
 type LocaleMessages = Record<string, any>;
 
-const loadedLocales = new Set<Locale>();
-
 export const useI18n = () => {
-  const locale = useState<Locale>("locale", () => DEFAULT_LOCALE);
+  const localeCookie = useCookie<Locale>("locale", {
+    sameSite: "lax",
+    maxAge: 31536000,
+  });
+
+  const locale = useState<Locale>(
+    "i18n-locale",
+    () => localeCookie.value || DEFAULT_LOCALE
+  );
 
   const messages = useState<Record<Locale, LocaleMessages>>(
     "i18n-messages",
     () => ({} as Record<Locale, LocaleMessages>)
   );
 
+  const loaded = useState<Record<Locale, boolean>>(
+    "i18n-loaded",
+    () => ({} as Record<Locale, boolean>)
+  );
+
   async function loadLocale(localeCode: Locale) {
-    if (loadedLocales.has(localeCode)) return;
+    if (loaded.value[localeCode]) {
+      return;
+    }
 
     try {
       const module = await import(`~/i18n/locales/${localeCode}.json`);
 
       messages.value[localeCode] = module.default;
-      loadedLocales.add(localeCode);
+      loaded.value[localeCode] = true;
     } catch (err) {
       console.error(`Failed to load locale "${localeCode}"`, err);
     }
@@ -39,7 +51,9 @@ export const useI18n = () => {
       getNestedValue(messages.value[locale.value], key) ??
       getNestedValue(messages.value[DEFAULT_LOCALE], key);
 
-    if (!text) return key;
+    if (!text) {
+      return key;
+    }
 
     if (params) {
       for (const [name, value] of Object.entries(params)) {
@@ -59,35 +73,51 @@ export const useI18n = () => {
     await loadLocale(localeCode);
 
     locale.value = localeCode;
+    localeCookie.value = localeCode;
 
     if (import.meta.client) {
-      localStorage.setItem("locale", localeCode);
-
       document.documentElement.lang = localeCode;
       document.documentElement.dir = localeCode === "ar" ? "rtl" : "ltr";
     }
   }
 
   async function initI18n() {
-    await loadLocale(DEFAULT_LOCALE);
+    let initialLocale = localeCookie.value;
 
-    let initialLocale: Locale = DEFAULT_LOCALE;
+    if (!initialLocale && import.meta.server) {
+      const acceptLanguage = useRequestHeader("accept-language");
 
-    if (import.meta.client) {
-      const stored = localStorage.getItem("locale");
+      const browserLang = acceptLanguage
+        ?.split(",")[0]
+        ?.split("-")[0]
+        ?.toLowerCase();
 
-      if (stored && LOCALES.includes(stored as Locale)) {
-        initialLocale = stored as Locale;
-      } else {
-        const browser = navigator.language.split("-")[0];
-
-        if (LOCALES.includes(browser as Locale)) {
-          initialLocale = browser as Locale;
-        }
+      if (browserLang && LOCALES.includes(browserLang as Locale)) {
+        initialLocale = browserLang as Locale;
       }
     }
 
-    await setLocale(initialLocale);
+    initialLocale ??= DEFAULT_LOCALE;
+
+    await loadLocale(DEFAULT_LOCALE);
+
+    if (initialLocale !== DEFAULT_LOCALE) {
+      await loadLocale(initialLocale);
+    }
+
+    locale.value = initialLocale;
+
+    localeCookie.value = initialLocale;
+
+    if (import.meta.client) {
+      document.documentElement.lang = initialLocale;
+      document.documentElement.dir = initialLocale === "ar" ? "rtl" : "ltr";
+    }
+  }
+
+  async function switchLocale(localeCode: Locale) {
+    await setLocale(localeCode);
+    await reloadNuxtApp();
   }
 
   return {
@@ -98,10 +128,6 @@ export const useI18n = () => {
     loadLocale,
     setLocale,
     initI18n,
-
-    switchLocale: async (localeCode: Locale) => {
-      await setLocale(localeCode);
-      await reloadNuxtApp();
-    },
+    switchLocale,
   };
 };

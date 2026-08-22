@@ -17,11 +17,11 @@
         <ul>
           <li v-for="route in routes" @click="navigate(route.routeName)" class="">
             <div v-if="route.isPopover"
-              class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
+              class="relative mb-3 hover:cursor-pointer cursor-pointer px-3 py-2">
               <Popover align="left">
                 <template #trigger>
                   <div
-                    class="relative mb-3 flex flex-col hover:cursor-pointer cursor-pointer items-center px-3 py-2 gap-2">
+                    class="flex flex-col items-center gap-2">
                     <div :class="checkIsActiveRoute(route.routeName)
                       ? ' bg-gray-200 dark:bg-neutral-600 '
                       : 'bg-transparent'
@@ -75,9 +75,7 @@
       enter-from="-translate-x-96" enter-to="translate-x-0" leave="transition ease-in-out duration-300 transform"
       leave-from="translate-x-0" leave-to="-translate-x-96"
       class="w-62.5 bg-neutral-100 dark:bg-neutral-800 border-r border-gray-200 dark:border-neutral-700 z-40 overflow-y-auto">
-      <div v-if="currentRoute?.routeName == 'home'">
-        <HomeSidebar />
-      </div>
+      <HomeSidebar v-if="currentRoute?.routeName == 'home'"/>
       <div v-else-if="currentRoute?.routeName == 'folders'">Folders</div>
     </TransitionRoot>
   </TransitionRoot>
