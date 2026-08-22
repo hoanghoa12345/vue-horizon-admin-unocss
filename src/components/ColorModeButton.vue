@@ -1,5 +1,6 @@
 <template>
-  <div class="inline-flex justify-center rounded-lg bg-gray-100 dark:bg-neutral-700 p-1 border border-gray-200 dark:border-neutral-600">
+  <div
+    class="inline-flex justify-center rounded-lg bg-gray-100 dark:bg-neutral-700 p-1 border border-gray-200 dark:border-neutral-600">
     <button @click="setTheme('system')" :class="[
       'px-3 py-1.5 text-xs font-medium rounded-md transition-colors',
       currentTheme === 'system'
@@ -32,8 +33,13 @@ import { ref, onMounted } from 'vue'
 
 const currentTheme = ref('system')
 
+const cookieTheme = useCookie("theme", {
+  sameSite: "lax",
+  maxAge: 60 * 60 * 24 * 365,
+});
+
 onMounted(() => {
-  currentTheme.value = localStorage.getItem('theme') || 'system'
+  currentTheme.value = cookieTheme.value || 'system'
 })
 
 const setTheme = (mode) => {
@@ -41,14 +47,14 @@ const setTheme = (mode) => {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 
   if (mode === 'system') {
-    localStorage.removeItem('theme')
+    cookieTheme.value = null
     if (mediaQuery.matches) {
       document.documentElement.classList.add('dark')
     } else {
       document.documentElement.classList.remove('dark')
     }
   } else {
-    localStorage.setItem('theme', mode)
+    cookieTheme.value = mode
     if (mode === 'dark') {
       document.documentElement.classList.add('dark')
     } else {

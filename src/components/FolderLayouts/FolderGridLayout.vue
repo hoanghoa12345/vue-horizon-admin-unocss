@@ -1,10 +1,10 @@
 <template>
     <div class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6">
-      <div 
+      <NuxtLink
         v-for="item in items" 
         :key="item.id"
         class="hover:shadow-lg hover:bg-elevated transition-all duration-300 px-4 py-6 cursor-pointer group bg-neutral-100 hover:bg-neutral-200 dark:bg-neutral-800 dark:hover:bg-neutral-700"
-        @click="openFolder(item)"
+        :to="`/folders/${item.name}?token=${token}`"
       >
         <div class="flex flex-col items-center text-center">
           <div class="w-24 h-24 mb-3 group-hover:scale-110 transition-transform duration-200">
@@ -24,34 +24,28 @@
           <p class="text-xs text-gray-500">{{ item.itemCount }} items</p>
           <p class="text-xs text-gray-400">{{ item.lastModified }}</p>
         </div>
-      </div>
+      </NuxtLink>
+    </div>
+
+    <div v-if="items.length === 0" class="text-center py-12">
+      <svg class="w-12 h-12 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-5L12 5H5a2 2 0 00-2 2z"></path>
+      </svg>
+      <p class="text-gray-500 text-sm">No folders found</p>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+const props = defineProps({
+  items: {
+    type: Array,
+    required: true
+  }
+})
 
-// Reactive data - folder items
-const items = ref([
-  { id: 1, name: 'Documents', itemCount: 24, lastModified: '2 days ago' },
-  { id: 2, name: 'Images', itemCount: 156, lastModified: '1 week ago' },
-  { id: 3, name: 'Projects', itemCount: 8, lastModified: 'Yesterday' },
-  { id: 4, name: 'Downloads', itemCount: 42, lastModified: '3 hours ago' },
-  { id: 5, name: 'Videos', itemCount: 12, lastModified: '5 days ago' },
-  { id: 6, name: 'Music', itemCount: 89, lastModified: '1 month ago' },
-  { id: 7, name: 'Archive', itemCount: 3, lastModified: '2 weeks ago' },
-  { id: 8, name: 'Templates', itemCount: 15, lastModified: '4 days ago' },
-  { id: 9, name: 'Backup', itemCount: 7, lastModified: '1 week ago' },
-  { id: 10, name: 'Work Files', itemCount: 31, lastModified: 'Today' },
-])
+const token = useRoute().query.token || ''
 
-// Open folder function
-const openFolder = (folder) => {
-  console.log('Opening folder:', folder.name)
-  // Add your folder opening logic here
-}
-
-// Add new folder function
 const addFolder = () => {
   const newId = items.value.length + 1
   const folderName = `New Folder ${newId}`
@@ -63,10 +57,3 @@ const addFolder = () => {
   })
 }
 </script>
-
-<style scoped>
-/* Additional custom styles if needed */
-.container {
-  max-width: 1400px;
-}
-</style>
