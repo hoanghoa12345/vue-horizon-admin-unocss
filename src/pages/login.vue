@@ -4,7 +4,7 @@
       <nav
         class="flex justify-between items-center border-b border-gray-200 px-4 py-2 dark:border-neutral-700 dark:bg-neutral-800 w-full">
         <div class="flex gap-2 items-center">
-          <Logo size="40" />
+          <Logo size="48" height="48" />
           <h2 class="text-xl font-semibold font-sans dark:text-white">
             {{ t('cloud_drive') }}
           </h2>

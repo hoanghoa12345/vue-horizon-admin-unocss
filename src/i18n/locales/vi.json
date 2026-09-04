@@ -24,5 +24,7 @@
   "name": "Tên",
   "size": "Kích thước",
   "type": "Loại",
-  "last_modified": "Cập nhật lần cuối"
+  "last_modified": "Cập nhật lần cuối",
+  "could_not_find_the_page": "Xin lỗi, chúng tôi không thể tìm thấy trang bạn đang tìm kiếm.",
+  "go_back_home": "Quay lại trang chủ"
 }

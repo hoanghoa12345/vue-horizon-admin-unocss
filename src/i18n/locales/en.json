@@ -24,5 +24,7 @@
   "name": "Name",
   "size": "Size",
   "type": "Type",
-  "last_modified": "Last modified"
+  "last_modified": "Last modified",
+  "could_not_find_the_page": "Sorry, we couldn't find the page you're looking for.",
+  "go_back_home": "Go back home"
 }

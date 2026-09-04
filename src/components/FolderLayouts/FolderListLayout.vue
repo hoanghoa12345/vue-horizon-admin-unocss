@@ -87,9 +87,3 @@ const addFolder = () => {
   })
 }
 </script>
-
-<style scoped>
-.container {
-  max-width: 1400px;
-}
-</style>

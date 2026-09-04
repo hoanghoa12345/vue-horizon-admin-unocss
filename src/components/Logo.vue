@@ -1,21 +1,11 @@
 <template>
-    <svg fill="none" :height="height" viewBox="0 0 40 48" :width="width" xmlns="http://www.w3.org/2000/svg">
-        <g :fill="fill">
-            <path
-                d="m26.9513 33.9836c-5.0261 3.1885-11.7632 2.5905-16.1476-1.7939-4.38442-4.3844-4.98238-11.1215-1.79387-16.1476l-4.31412-4.3141c-5.491363 7.4362-4.86958 17.9694 1.86535 24.7043 6.73494 6.735 17.26814 7.3568 24.70434 1.8654z" />
-            <path
-                d="m13.0402 12.0115c5.0262-3.18901 11.7637-2.5912 16.1483 1.7934s4.9824 11.1221 1.7934 16.1483l4.3141 4.3141c5.4919-7.4363 4.8702-17.9699-1.8649-24.70502s-17.2687-7.35675-24.70496-1.86488z" />
-            <path
-                d="m29.1882 13.8049c-4.3846-4.38462-11.122-4.98243-16.1482-1.7934l-2.1619-2.16189c-.7715.53639-1.50626 1.14839-2.19402 1.83619-.68787.6878-1.30001 1.4228-1.83642 2.1944l2.16191 2.1619c-3.18851 5.0261-2.59055 11.7632 1.79383 16.1476 4.3845 4.3844 11.1215 4.9824 16.1476 1.7939l2.1661 2.166c.7716-.5364 1.5065-1.1485 2.1944-1.8364.6878-.6878 1.2998-1.4226 1.8362-2.194l-2.166-2.166c3.189-5.0262 2.5911-11.7637-1.7935-16.1483z"
-                opacity=".2" />
-        </g>
-    </svg>
+    <svg xmlns="http://www.w3.org/2000/svg" :width="width" :height="height" viewBox="0 0 48 48"><title>cloud-drive</title><g fill="none"><path fill="url(#SVGlROO8bHf)" d="M24 9c-6.29 0-11.45 4.84-11.959 11H11.5a8.5 8.5 0 0 0 0 17h25a8.5 8.5 0 0 0 0-17h-.541C35.45 13.84 30.29 9 24 9"/><path fill="url(#SVGyCyLqdjA)" fill-opacity=".3" d="M20 28.5a8.5 8.5 0 1 1-17 0a8.5 8.5 0 0 1 17 0"/><path fill="url(#SVGblF96ciL)" fill-opacity=".3" d="M24 33c6.627 0 12-5.373 12-12S30.627 9 24 9c-6.296 0-11.46 4.85-11.96 11.017a8.5 8.5 0 0 1 7.2 12.002C20.7 32.65 22.309 33 24 33"/><path fill="url(#SVGsArCpeLq)" d="M24 33c6.627 0 12-5.373 12-12S30.627 9 24 9c-6.296 0-11.46 4.85-11.96 11.017a8.5 8.5 0 0 1 7.2 12.002C20.7 32.65 22.309 33 24 33"/><path fill="url(#SVGm3jLDdWK)" fill-opacity=".5" d="M24 9c-6.29 0-11.45 4.84-11.959 11H11.5a8.5 8.5 0 0 0 0 17h25a8.5 8.5 0 0 0 0-17h-.541C35.45 13.84 30.29 9 24 9"/><defs><linearGradient id="SVGlROO8bHf" x1="4.5" x2="22.079" y1="14.25" y2="41.645" gradientUnits="userSpaceOnUse"><stop stop-color="#0fafff"/><stop offset="1" stop-color="#367af2"/></linearGradient><linearGradient id="SVGyCyLqdjA" x1="3" x2="14.46" y1="22.912" y2="33.055" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fcfcfc" stop-opacity="0"/></linearGradient><linearGradient id="SVGblF96ciL" x1="16.193" x2="19.363" y1="10.35" y2="26.899" gradientUnits="userSpaceOnUse"><stop stop-color="#fff"/><stop offset="1" stop-color="#fcfcfc" stop-opacity="0"/></linearGradient><radialGradient id="SVGsArCpeLq" cx="0" cy="0" r="1" gradientTransform="rotate(-22.883 77.27 -17.737)scale(14.6589 13.0847)" gradientUnits="userSpaceOnUse"><stop offset=".412" stop-color="#2c87f5"/><stop offset="1" stop-color="#2c87f5" stop-opacity="0"/></radialGradient><radialGradient id="SVGm3jLDdWK" cx="0" cy="0" r="1" gradientTransform="rotate(62.445 5.145 21.978)scale(34.9921 259.97)" gradientUnits="userSpaceOnUse"><stop offset=".5" stop-color="#dd3ce2" stop-opacity="0"/><stop offset="1" stop-color="#dd3ce2"/></radialGradient></defs></g></svg>
 </template>
 <script setup>
 const props = defineProps({
     fill: {
         type: String,
-        default: '#875bf7',
+        default: '#2b7fff',
     },
     height: {
         type: [String, Number],
@@ -23,7 +13,7 @@ const props = defineProps({
     },
     width: {
         type: [String, Number],
-        default: '40',
+        default: '48',
     },
 });
 </script>

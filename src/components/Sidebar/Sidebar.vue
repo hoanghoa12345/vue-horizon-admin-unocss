@@ -8,7 +8,7 @@
       <div class="flex items-center justify-center pt-4">
         <div :aria-label="t('my_drive')">
           <NuxtLink to="/">
-            <Logo width="36"/>
+            <Logo width="48" height="48"/>
           </NuxtLink>
         </div>
       </div>
